@@ -1,0 +1,5 @@
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAtyY05CB9HcN7B0AAHsFXQwepM9QVTBb1wEvl2tlYUmF5KBWcX2F7xS/zc/1X07AOigfaZ2ylVmP84KYOj5RYJ0rktNj8d+XR6lRe0IAYo0EgMotMun6fz7k9Oq8+R2cumN34HY1uiOqGvkg1CyFjVMVDZADOIqchMCm3Msdzif31r3OCHfEONHyppVDyJPNugOK8K9gYzzwxp0YBddLxF3hPCo1UlqztG30al6jhGzrc18VRleyqFc4f78wdbWSZZFDDk4b0yuSp/DA7P5HZdwvppnbegnBqldtRgEzyHioT2x+4PRD3BQQ1+bY4RjGlCLovWCcYMNDu9IGR1GlFjw== rsa-key-20210915
+
+//
+
+D:\programs\2021.1.20f1\Editor\Data\Tools\UnityYAMLMerge.exe merge -p %base %theirs %mine %merged
