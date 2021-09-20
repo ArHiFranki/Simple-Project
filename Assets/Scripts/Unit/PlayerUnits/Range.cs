@@ -12,11 +12,7 @@ public class Range : PlayerUnit
 
     [SerializeField] [Header("Минимальная дистанция до ктоторой можно подойти")] private float minimalDistance;
     [SerializeField] [Header("Агрорадиус")] float radius;
-    [SerializeField] bool isUnitAtack;
-    [SerializeField] bool isUnitDefend;
-    [SerializeField] [Header("Точка которую нужно защищать")] Transform defendPoint;
-
-
+    
     [Header("Префаб снаряда")] public GameObject BulletPrefab;
     [Header("Оружие")] public GameObject BulletStartPosition;
     [Header("Скорость пули")] public float bulletSpeed;
@@ -32,9 +28,11 @@ public class Range : PlayerUnit
 
     void Update()
     {
+        statusSelectionMenu.transform.LookAt(Camera.main.transform);//направление на камеру
+
         timeAfterLastShot += Time.deltaTime;
         if (isUnitAtack) AtackStyle();
-        if (isUnitDefend) DefenseStyle();
+        if (isUnitDefend && defendPoint != null) DefenseStyle();
     }
 
     private void AtackStyle() //Атака
@@ -71,7 +69,12 @@ public class Range : PlayerUnit
 
         Enemy[] Enemies = FindObjectsOfType<Enemy>();//Поиск всех объектов с компонентом Enemy
         Transform ClosedEnemy = FindClosetUnit(Enemies);//ближайший враг
-        distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
+         
+        if(ClosedEnemy != null)
+        {
+          distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
+        }
+
         float distToDefendPoint = Vector3.Distance(defendPoint.position, transform.position); //дистанция дозащишаемой точки
 
         if (distToDefendPoint > 1 && ClosedEnemy != null)
@@ -95,7 +98,12 @@ public class Range : PlayerUnit
                 arrowCreate(ClosedEnemy);
             }
         }
-        else if (distToDefendPoint < 1 && distToEnemy < minimalDistance)
+        else if (distToDefendPoint > 1 && ClosedEnemy == null)
+        {
+            nav.enabled = true;
+            nav.SetDestination(defendPoint.position);
+        }
+        else if (distToDefendPoint < 1 && ClosedEnemy != null && distToEnemy < minimalDistance)
         {
             transform.LookAt(ClosedEnemy);
             nav.enabled = false;

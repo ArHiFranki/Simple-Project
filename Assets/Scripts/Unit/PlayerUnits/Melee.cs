@@ -9,10 +9,7 @@ public class Melee : PlayerUnit
 
     [SerializeField] [Header("Минимальная дистанция до ктоторой можно подойти")]  private float minimalDistance;
     [SerializeField] [Header("Агрорадиус")] float radius;
-    [SerializeField] bool isUnitAtack;
-    [SerializeField] bool isUnitDefend;
-    [SerializeField] [Header("Точка которую нужно защищать")] Transform defendPoint;
-
+   
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();

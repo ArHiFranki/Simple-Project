@@ -5,17 +5,18 @@ using UnityEngine;
 public class BildingsGird : MonoBehaviour
 {
     public Vector2Int GridSize = new Vector2Int(10, 10);//Размер сетки
-    [SerializeField] private int _deployGridSize;
+    [SerializeField][Header("Область размещения юнитов")]
+    private int _deployGridSize;
 
-    
+    /*
     [SerializeField] private int _cursorPositionX;
     [SerializeField] private int _cursorPositionY;
     [SerializeField] private int _gridSizaX;
     [SerializeField] private int _gridSizeY;
     [SerializeField] private int _flyingBildingSizeX;
     [SerializeField] private int _flyingBildingSizeY;
-    
-    [SerializeField] private int _statePosition;
+    */
+    private int _statePosition;
     private Building[,] gird;//Двумерный массив зданий
     private Building flyingBilding;//Активное (выбранное) здание 
     private Camera mainCamera;//Камера
@@ -79,18 +80,17 @@ public class BildingsGird : MonoBehaviour
 
                 bool available = true; //можно ли поставить здание
 
-                
+                /*
                 _cursorPositionX = cursorPositionX;
                 _cursorPositionY = cursorPositionY;
                 _gridSizaX = GridSize.x;
                 _gridSizeY = GridSize.y;
                 _flyingBildingSizeX = flyingBilding.Size.x;
                 _flyingBildingSizeY = flyingBilding.Size.y;
+                */
 
 
                 _statePosition = flyingBilding.statePosition;
-                
-
                 if (_statePosition == 0 || _statePosition == 1)
                 {
                     if (cursorPositionX < 0 || cursorPositionX > GridSize.x - flyingBilding.Size.x) available = false;
@@ -106,7 +106,7 @@ public class BildingsGird : MonoBehaviour
 
                 }
 
-                if (flyingBilding.GetComponent<PlayerUnit>())
+               if (flyingBilding.GetComponent<PlayerUnit>()) 
                 {
                     if (cursorPositionY >= _deployGridSize) available = false;
                 }
@@ -153,7 +153,7 @@ public class BildingsGird : MonoBehaviour
 
     void PlaceFlyingBilding(int placeX, int placeY) //поставаить здание
     {
-        if (_statePosition == 0 || _statePosition == 1)
+        if (_statePosition == 0 || _statePosition == 1)//первое и второе положения
         {
             for (int x = 0; x < flyingBilding.Size.x; x++)
             {
@@ -163,7 +163,7 @@ public class BildingsGird : MonoBehaviour
                 }
             }
         }
-        if (_statePosition == 2 || _statePosition == 3)
+        if (_statePosition == 2 || _statePosition == 3)//третье и четвертое положение
         {
             for (int x = 0; x < flyingBilding.Size.x; x++)
             {
@@ -174,9 +174,13 @@ public class BildingsGird : MonoBehaviour
             }
         }
 
+     
+
+
         flyingBilding.SetNormalColor();//Задать нормальный цвет
         flyingBilding = null;//Поставить здание
     }
+
 
   
 }
