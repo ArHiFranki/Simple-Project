@@ -8,6 +8,9 @@ public class BildingsGird : MonoBehaviour
     [SerializeField][Header("Область размещения юнитов")]
     private int _deployGridSize;
 
+    [SerializeField][Header("Целевая точка юнита при выборе защитного состояния")]
+    private Building targetPoint;
+
     /*
     [SerializeField] private int _cursorPositionX;
     [SerializeField] private int _cursorPositionY;
@@ -16,9 +19,13 @@ public class BildingsGird : MonoBehaviour
     [SerializeField] private int _flyingBildingSizeX;
     [SerializeField] private int _flyingBildingSizeY;
     */
+
     private int _statePosition;
     private Building[,] gird;//Двумерный массив зданий
+
     private Building flyingBilding;//Активное (выбранное) здание 
+
+    private Building UnitflyingBilding;//Юнит которому нужно задать цель
     private Camera mainCamera;//Камера
 
     private void Awake()
@@ -33,6 +40,10 @@ public class BildingsGird : MonoBehaviour
     private void Update()
     {
         PlaceBuilding();//Размещение  здания
+        if (UnitflyingBilding != null)
+        {
+            SetDefendPoint();
+        }
 
     }
     private void OnDrawGizmos()//Отрисовка сетки объекта в сцене (Вспомогательно)
@@ -174,13 +185,40 @@ public class BildingsGird : MonoBehaviour
             }
         }
 
-     
-
-
         flyingBilding.SetNormalColor();//Задать нормальный цвет
+
+        
+        if (flyingBilding.GetComponent<PlayerUnit>() && UnitflyingBilding == null)
+        {
+            Debug.Log("HI");
+            UnitflyingBilding = flyingBilding;//Сохраняем юнита
+        }
+
+        
         flyingBilding = null;//Поставить здание
+
     }
 
+    void SetDefendPoint()
+    {
+        PlayerUnit playerUnit= UnitflyingBilding.GetComponent<PlayerUnit>();
 
-  
+        if (playerUnit.isUnitAtack)
+        {
+            UnitflyingBilding = null;
+            Debug.Log("IsUnitAtack");
+        }
+        if (playerUnit.isUnitDefend)
+        {   
+            Debug.Log("IsUnitDefend");
+
+            flyingBilding = Instantiate(targetPoint);//Создание обьекта
+
+            playerUnit.defendPoint = flyingBilding.transform;
+
+
+            UnitflyingBilding = null;
+        }
+    }
+    
 }

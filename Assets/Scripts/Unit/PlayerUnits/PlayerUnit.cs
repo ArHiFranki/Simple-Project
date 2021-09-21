@@ -15,20 +15,22 @@ public class PlayerUnit :Unit
 
     [Header("Точка которую нужно защищать")] 
     public Transform defendPoint;
-    
+
+
+ 
 
     public void IsUnitAtack()
     {
         isUnitAtack = true;
         isUnitDefend = false;
       
-       // statusSelectionMenu.SetActive(false);
+        statusSelectionMenu.SetActive(false);
     }
 
     public void IsUnitDefend()
     {
         isUnitAtack = false;
         isUnitDefend = true;
-      //  statusSelectionMenu.SetActive(false);
+        statusSelectionMenu.SetActive(false);
     }
 }
