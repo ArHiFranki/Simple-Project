@@ -19,7 +19,9 @@ public class Melee : PlayerUnit
 
     void Update()
     {
-        if(isUnitAtack) AtackStyle();
+        statusSelectionMenu.transform.LookAt(Camera.main.transform);//направление на камеру
+
+        if (isUnitAtack) AtackStyle();
         if(isUnitDefend) DefenseStyle();
     }
 

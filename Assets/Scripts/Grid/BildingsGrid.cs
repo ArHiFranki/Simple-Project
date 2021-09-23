@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BildingsGird : MonoBehaviour
+public class BildingsGrid : MonoBehaviour
 {
     public Vector2Int GridSize = new Vector2Int(10, 10);//Размер сетки
     [SerializeField][Header("Область размещения юнитов")]
@@ -190,7 +190,6 @@ public class BildingsGird : MonoBehaviour
         
         if (flyingBilding.GetComponent<PlayerUnit>() && UnitflyingBilding == null)
         {
-            Debug.Log("HI");
             UnitflyingBilding = flyingBilding;//Сохраняем юнита
         }
 
@@ -206,17 +205,11 @@ public class BildingsGird : MonoBehaviour
         if (playerUnit.isUnitAtack)
         {
             UnitflyingBilding = null;
-            Debug.Log("IsUnitAtack");
         }
         if (playerUnit.isUnitDefend)
         {   
-            Debug.Log("IsUnitDefend");
-
             flyingBilding = Instantiate(targetPoint);//Создание обьекта
-
             playerUnit.defendPoint = flyingBilding.transform;
-
-
             UnitflyingBilding = null;
         }
     }
