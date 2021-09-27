@@ -5011,6 +5011,9 @@ MonoBehaviour:
   GridSize: {x: 7, y: 14}
   _deployGridSize: 3
   targetPoint: {fileID: 8561352448266905544, guid: 48f2e674090f0f3428738090b28aa158, type: 3}
+  cellOnGrid: {fileID: 0}
+  cellParent1: {fileID: 0}
+  cellParent2: {fileID: 0}
 --- !u!4 &1935077492
 Transform:
   m_ObjectHideFlags: 0
