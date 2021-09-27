@@ -11,6 +11,16 @@ public class BildingsGrid : MonoBehaviour
     [SerializeField][Header("Целевая точка юнита при выборе защитного состояния")]
     private Building targetPoint;
 
+    [SerializeField][Header("Ячейка на сетке")]
+    private GameObject cellOnGrid;
+
+    [SerializeField][Header("Коробка для ячеек первой половины поля")]
+    private GameObject cellParent1;
+
+    [SerializeField][Header("Коробка для ячеек второй половины поля")]
+    private GameObject cellParent2;
+
+
     /*
     [SerializeField] private int _cursorPositionX;
     [SerializeField] private int _cursorPositionY;
@@ -21,21 +31,27 @@ public class BildingsGrid : MonoBehaviour
     */
 
     private int _statePosition;
-    private Building[,] gird;//Двумерный массив зданий
+    private Building[,] grid;//Двумерный массив зданий
 
     private Building flyingBilding;//Активное (выбранное) здание 
 
     private Building UnitflyingBilding;//Юнит которому нужно задать цель
     private Camera mainCamera;//Камера
 
+    private GameObject[,] cells; //ячейки для отоброжения
+
     private void Awake()
     {
-        gird = new Building[GridSize.x, GridSize.y];//Инициализация массива
+        grid = new Building[GridSize.x, GridSize.y];//Инициализация массива размещенных оюъектов
+        cells = new GameObject[GridSize.x, GridSize.y];
 
         mainCamera = Camera.main;
+
+        DisplayingСells();//отображение ячеек
+        cellParent1.SetActive(false);
+        cellParent2.SetActive(false);
+
     }
-
-
 
     private void Update()
     {
@@ -45,7 +61,10 @@ public class BildingsGrid : MonoBehaviour
             SetDefendPoint();
         }
 
+      
     }
+
+
     private void OnDrawGizmos()//Отрисовка сетки объекта в сцене (Вспомогательно)
     {
         for (int x = 0; x < GridSize.x; x++)
@@ -144,7 +163,7 @@ public class BildingsGrid : MonoBehaviour
             {
                 for (int y = 0; y < flyingBilding.Size.y; y++)
                 {
-                    if (gird[placeX + x, placeY + y] != null) return true; //если клетка занята
+                    if (grid[placeX + x, placeY + y] != null) return true; //если клетка занята
                 }
             }
         }
@@ -155,7 +174,7 @@ public class BildingsGrid : MonoBehaviour
             {
                 for (int y = 0; y < flyingBilding.Size.y; y++)
                 {
-                    if (gird[placeX - x, placeY - y] != null) return true; //если клетка занята
+                    if (grid[placeX - x, placeY - y] != null) return true; //если клетка занята
                 }
             }
         }
@@ -170,7 +189,8 @@ public class BildingsGrid : MonoBehaviour
             {
                 for (int y = 0; y < flyingBilding.Size.y; y++)
                 {
-                    gird[placeX + x, placeY + y] = flyingBilding;
+                    celColorChaige(cells[placeX +x, placeY + y],true);
+                    grid[placeX + x, placeY + y] = flyingBilding;
                 }
             }
         }
@@ -180,7 +200,8 @@ public class BildingsGrid : MonoBehaviour
             {
                 for (int y = 0; y < flyingBilding.Size.y; y++)
                 {
-                    gird[placeX - x, placeY - y] = flyingBilding;
+                    celColorChaige(cells[placeX - x, placeY - y], true);
+                    grid[placeX - x, placeY - y] = flyingBilding;
                 }
             }
         }
@@ -195,10 +216,11 @@ public class BildingsGrid : MonoBehaviour
 
         
         flyingBilding = null;//Поставить здание
-
+        CelParentSetActive(false);
+       
     }
 
-    void SetDefendPoint()
+    void SetDefendPoint()//установить оборонительную точку
     {
         PlayerUnit playerUnit= UnitflyingBilding.GetComponent<PlayerUnit>();
 
@@ -207,11 +229,49 @@ public class BildingsGrid : MonoBehaviour
             UnitflyingBilding = null;
         }
         if (playerUnit.isUnitDefend)
-        {   
+        {
+            CelParentSetActive(true);
+           
             flyingBilding = Instantiate(targetPoint);//Создание обьекта
             playerUnit.defendPoint = flyingBilding.transform;
             UnitflyingBilding = null;
         }
+        
+    }
+
+    void DisplayingСells()//отображение ячеек
+    {
+        for (int i = 0; i < GridSize.x; i++)
+        {
+            for (int j = 0; j < GridSize.y; j++)
+            {
+                Vector3 cellPosition = transform.position + new Vector3(i, 0, j);
+
+                if (j <_deployGridSize)
+                {
+                    cells[i, j] = Instantiate(cellOnGrid, cellParent1.transform);
+                }
+                else cells[i, j] = Instantiate(cellOnGrid, cellParent2.transform);
+
+                cells[i, j].transform.position = cellPosition;
+
+            }
+        }
     }
     
+    void celColorChaige(GameObject _cell, bool taken)//смена цвета ячейки 
+    {
+        Renderer cellRenderer = _cell.GetComponent<Renderer>();
+        if (taken)
+        {
+            cellRenderer.material.color = Color.red;
+        }else cellRenderer.material.color = Color.green;
+
+    }
+
+    void CelParentSetActive(bool active)
+    { 
+       cellParent1.SetActive(active);
+       cellParent2.SetActive(active);   
+    }
 }
