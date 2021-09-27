@@ -5035,15 +5035,9 @@ MonoBehaviour:
   GridSize: {x: 7, y: 14}
   _deployGridSize: 3
   targetPoint: {fileID: 8561352448266905544, guid: 48f2e674090f0f3428738090b28aa158, type: 3}
-<<<<<<< HEAD
-  cellOnGrid: {fileID: 0}
-  cellParent1: {fileID: 0}
-  cellParent2: {fileID: 0}
-=======
   cellOnGrid: {fileID: 4161744744832001138, guid: 76e1acb885873b2419faeddd282b62a1, type: 3}
   cellParent1: {fileID: 2021683517}
   cellParent2: {fileID: 2060732246}
->>>>>>> remotes/origin/Filin
 --- !u!4 &1935077492
 Transform:
   m_ObjectHideFlags: 0
