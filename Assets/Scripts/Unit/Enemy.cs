@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Enemy : Unit
 {
     private NavMeshAgent nav;//Навмеш
-    private GameObject Base; //Цель которую нужно атаковать
+    //private GameObject Base; //Цель которую нужно атаковать
     private float distToPlayerUnit; //дистанция до Ближайшего Юнита игрока
     private float distToBase;//Дистанция до базы
 
@@ -17,7 +17,7 @@ public class Enemy : Unit
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        Base = GameObject.FindGameObjectWithTag("Finish");
+        //Base = GameObject.FindGameObjectWithTag("Finish");
         _animator = GetComponent<Animator>();
 
     }
@@ -35,17 +35,21 @@ public class Enemy : Unit
 
         Transform ClosedUnit = FindClosetUnit(PlayerUnits);//ближайший юнит
 
+        Base[] _base = FindObjectsOfType<Base>();//Поиск всех объектов с компонентом Base
+
+        Transform ClosetBase = FindClosetBace(_base);
+
         if (ClosedUnit != null) //если на сцене есть юниты игрока
         {
             distToPlayerUnit = Vector3.Distance(ClosedUnit.position, transform.position); //расчет дистанции до ближайшего юнита
         }
 
-        distToBase = Vector3.Distance(Base.transform.position, transform.position); //расчет дистанции до базы
+        distToBase = Vector3.Distance(ClosetBase.position, transform.position); //расчет дистанции до базы
 
         if (ClosedUnit == null || distToPlayerUnit > radius) //Если юнит игрока вне агрозоны или его нет
         {
            nav.enabled = true;
-           nav.SetDestination(Base.transform.position); //идет к базе 
+           nav.SetDestination(ClosetBase.position); //идет к базе 
         }
         else if (distToPlayerUnit < radius && distToPlayerUnit > minimalDistance) //Если юнит в агрозоне
         {
@@ -65,7 +69,7 @@ public class Enemy : Unit
         }
         if (distToBase < 2f && (ClosedUnit == null || distToPlayerUnit > radius))
         {
-            transform.LookAt(Base.transform); //Смотреть на базу
+            transform.LookAt(ClosetBase); //Смотреть на базу
             nav.enabled = false;
             _animator.SetTrigger("Atack");
         }

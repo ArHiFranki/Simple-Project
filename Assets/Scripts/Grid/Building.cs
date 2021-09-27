@@ -5,27 +5,30 @@ using UnityEngine;
 //Скрипт здания
 public class Building : MonoBehaviour
 {
-    [SerializeField] private Renderer MainRenderer;//Отображение объекта
-
     public Vector2Int Size = Vector2Int.one;//Размер здания на сетке
 
-    public int statePosition = 0;
+    [HideInInspector]public int statePosition = 0;
+
+    Color gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
+
 
     public void SetTransperent(bool available)//Задать цвет активному зданию
     {
         if (available)//если объект можно поставить
         {
-            MainRenderer.material.color = Color.green;
+            gizmosColor = Color.green;
         }
-        else
+        else 
         {
-            MainRenderer.material.color = Color.red;
+            gizmosColor = Color.red;
         }
     }
 
     public void SetNormalColor()//Вернуть нормальный цвет
     {
-        MainRenderer.material.color = Color.white;
+
+        gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
+
     }
 
 
@@ -35,7 +38,7 @@ public class Building : MonoBehaviour
         {
             for (int y = 0; y < Size.y; y++)
             {
-                Gizmos.color = new Color(0.88f, 0.5f, 0f, 0.3f);
+                Gizmos.color = gizmosColor;
                 if (statePosition == 0 || statePosition == 1)
                 {
                     Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1, 0.1f, 1));

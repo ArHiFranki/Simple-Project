@@ -86,4 +86,21 @@ public class Unit : MonoBehaviour
         }
         return closetUnit;
     }
+
+    public Transform FindClosetBace(Base[] baseies)//Поиск и возвращение ближайшой базы
+    {
+
+        float distance = Mathf.Infinity;
+        Transform ClosetBase = null; //Ближайший 
+
+        foreach (Base _base in baseies) //перебор всех баз
+        {
+            if (Vector3.Distance(_base.transform.position, transform.position) < distance)
+            {
+                distance = Vector3.Distance(_base.transform.position, transform.position);
+                ClosetBase = _base.transform;
+            }
+        }
+        return ClosetBase;
+    }
 }
