@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] private GameController _gameController;
     [SerializeField] private List<Wave> _waves;
     [SerializeField] private List<Transform> _spawnPoints;
 
@@ -27,24 +28,7 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        _timeAfterLastSpawn += Time.deltaTime;
-
-        if (_timeAfterLastSpawn >= _currentWave.Delay)
-        {
-            InstantiateEnemy();
-            _spawned++;
-            _timeAfterLastSpawn = 0;
-        }
-
-        if (_currentWave.Count <= _spawned)
-        {
-            if (_waves.Count > _currentWaveNumber + 1)
-            {
-                AllEnemySpawned?.Invoke();
-            }
-
-            _currentWave = null;
-        }
+        SpawnWave();
     }
 
     private void InstantiateEnemy()
@@ -63,8 +47,33 @@ public class Spawner : MonoBehaviour
 
     public void StartNextWave()
     {
-        SetWave(++_currentWaveNumber);
+        SetWave(_currentWaveNumber++);
         _spawned = 0;
+    }
+
+    private void SpawnWave()
+    {
+        if(_gameController.IsFightPhase && !_gameController.IsGameOver)
+        {
+            _timeAfterLastSpawn += Time.deltaTime;
+
+            if (_timeAfterLastSpawn >= _currentWave.Delay)
+            {
+                InstantiateEnemy();
+                _spawned++;
+                _timeAfterLastSpawn = 0;
+            }
+
+            if (_currentWave.Count <= _spawned)
+            {
+                if (_waves.Count > _currentWaveNumber + 1)
+                {
+                    AllEnemySpawned?.Invoke();
+                }
+
+                _currentWave = null;
+            }
+        }
     }
 }
 

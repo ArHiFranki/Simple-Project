@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     private int _curruntBaseHitPoints;
 
     public bool IsGamePause => _isGamePause;
+    public bool IsGameOver => _isGameOver;
     public bool IsPreparationPhase => _isPreparationPhase;
     public bool IsFightPhase => _isFightPhase;
     public int BaseHitPoints => _curruntBaseHitPoints;
