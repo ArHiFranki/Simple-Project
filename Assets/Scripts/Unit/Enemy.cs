@@ -12,20 +12,25 @@ public class Enemy : Unit
 
     [Header("Минимальная дистанция до ктоторой можно подойти")] [SerializeField] private float minimalDistance;
     [SerializeField] [Header("Агрозона врага")] private float radius; //радиус видимости врага
+    [SerializeField] private int _reward;
+    [SerializeField] private GameController _gameController;
 
 
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        //Base = GameObject.FindGameObjectWithTag("Finish");
         _animator = GetComponent<Animator>();
-
     }
 
 
     void Update()
     {
         EnemyMovment();
+    }
+
+    public override void Death()
+    {
+        _gameController.ChangeGold(_reward);
     }
 
     private void EnemyMovment() //Перемещение врага
@@ -75,6 +80,8 @@ public class Enemy : Unit
         }
     }
 
-
-
+    public void InitEnemy(GameController gameController)
+    {
+        _gameController = gameController;
+    }
 }

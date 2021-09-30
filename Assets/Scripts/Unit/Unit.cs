@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Unit : MonoBehaviour
+public abstract class Unit : MonoBehaviour
 {
-    [SerializeField][Header("Максимальный уровень HP")] private int _healthMax;
-    [SerializeField] [Header("Текущий уровень HP")] private int _currentHealth;
-    [SerializeField] [Header("Урон")] public int _damage;
-    [SerializeField] private float _deahtAnimationDuration;
+    [SerializeField] private int _healthMax;
+    [SerializeField] private int _currentHealth;
+    [SerializeField] public int _damage;
 
     [HideInInspector]public Animator _animator;
 
-    private const string _deathAnimationTrigger = "Die";
+    public abstract void Death();
 
     private void Awake()
     {
-        
         _currentHealth = _healthMax;
         _animator = GetComponent<Animator>();
     }
-
-    
 
     public void ApplyDamage(int damage)
     {        
@@ -29,8 +25,7 @@ public class Unit : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            //StartCoroutine(Death());
-           // Destroy(gameObject);
+            Death();
         }
     }
 
@@ -45,13 +40,6 @@ public class Unit : MonoBehaviour
                 _currentHealth = _healthMax;
             }
         }
-    }
-
-    IEnumerator Death()
-    {
-       // _animator.SetTrigger(_deathAnimationTrigger);
-        yield return new WaitForSeconds(_deahtAnimationDuration);
-        Destroy(gameObject);
     }
 
     public Transform FindClosetUnit(PlayerUnit[] PlayerUnits)//Поиск и возвращение ближайшего юнита игрока

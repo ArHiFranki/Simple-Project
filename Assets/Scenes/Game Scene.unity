@@ -845,19 +845,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameController: {fileID: 284352319}
   _waves:
-  - Template: {fileID: 2508252201955450852, guid: 457008cce004be245a11cf714e2f957a, type: 3}
+  - Template: {fileID: 2508252201955448859, guid: 457008cce004be245a11cf714e2f957a, type: 3}
     Delay: 2
     Count: 2
-  - Template: {fileID: 2508252201955450852, guid: 457008cce004be245a11cf714e2f957a, type: 3}
+  - Template: {fileID: 2508252201955448859, guid: 457008cce004be245a11cf714e2f957a, type: 3}
     Delay: 2
     Count: 4
-  - Template: {fileID: 2508252201955450852, guid: 457008cce004be245a11cf714e2f957a, type: 3}
+  - Template: {fileID: 2508252201955448859, guid: 457008cce004be245a11cf714e2f957a, type: 3}
     Delay: 1.5
     Count: 6
-  - Template: {fileID: 2508252201955450852, guid: 457008cce004be245a11cf714e2f957a, type: 3}
+  - Template: {fileID: 2508252201955448859, guid: 457008cce004be245a11cf714e2f957a, type: 3}
     Delay: 1
     Count: 8
-  - Template: {fileID: 2508252201955450852, guid: 457008cce004be245a11cf714e2f957a, type: 3}
+  - Template: {fileID: 2508252201955448859, guid: 457008cce004be245a11cf714e2f957a, type: 3}
     Delay: 0.75
     Count: 10
   _spawnPoints:

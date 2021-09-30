@@ -34,10 +34,11 @@ public class Spawner : MonoBehaviour
     private void InstantiateEnemy()
     {
         int randomNumber = Random.Range(0, _spawnPoints.Count);
-        Instantiate(_currentWave.Template, 
-                    _spawnPoints[randomNumber].position, 
-                    _spawnPoints[randomNumber].rotation, 
-                    _spawnPoints[randomNumber]);
+        Enemy tmpEnemy = Instantiate(_currentWave.Template, 
+                                     _spawnPoints[randomNumber].position, 
+                                     _spawnPoints[randomNumber].rotation, 
+                                     _spawnPoints[randomNumber]);
+        tmpEnemy.InitEnemy(_gameController);
     }
 
     private void SetWave(int index)
@@ -80,7 +81,7 @@ public class Spawner : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public GameObject Template;
+    public Enemy Template;
     public float Delay;
     public int Count;
 }

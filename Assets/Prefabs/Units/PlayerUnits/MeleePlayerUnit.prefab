@@ -106,10 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34f600e1bd8a404aacd3e24e0387ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthMax: 0
+  _healthMax: 50
   _currentHealth: 0
-  _damage: 0
-  _deahtAnimationDuration: 0
+  _damage: 2
   _animator: {fileID: 0}
   isUnitAtack: 0
   isUnitDefend: 0
