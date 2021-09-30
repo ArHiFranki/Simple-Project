@@ -48,7 +48,7 @@ public class Melee : PlayerUnit
         {
             transform.LookAt(ClosedEnemy); 
             nav.enabled = false;
-            _animator.SetTrigger("Atack");
+            animator.SetTrigger("Atack");
             //arrowCreate(ClosedEnemy);
         }
     }
@@ -84,7 +84,7 @@ public class Melee : PlayerUnit
             {
                 transform.LookAt(ClosedEnemy);
                 nav.enabled = false;
-                _animator.SetTrigger("Atack");
+                animator.SetTrigger("Atack");
                 //arrowCreate(ClosedEnemy);
             }
         }
@@ -97,7 +97,7 @@ public class Melee : PlayerUnit
         {
             transform.LookAt(ClosedEnemy);
             nav.enabled = false;
-            _animator.SetTrigger("Atack");
+            animator.SetTrigger("Atack");
             //arrowCreate(ClosedEnemy);
         }
     }

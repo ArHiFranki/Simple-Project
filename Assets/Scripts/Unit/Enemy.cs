@@ -19,7 +19,6 @@ public class Enemy : Unit
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
     }
 
 
@@ -68,7 +67,7 @@ public class Enemy : Unit
         {
             transform.LookAt(ClosedUnit); //Смотреть на Юнита
             nav.enabled = false;
-            _animator.SetTrigger("Atack");
+            animator.SetTrigger("Atack");
 
 
         }
@@ -76,7 +75,7 @@ public class Enemy : Unit
         {
             transform.LookAt(ClosetBase); //Смотреть на базу
             nav.enabled = false;
-            _animator.SetTrigger("Atack");
+            animator.SetTrigger("Atack");
         }
     }
 

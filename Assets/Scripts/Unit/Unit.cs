@@ -9,14 +9,14 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private int _currentHealth;
     [SerializeField] public int _damage;
 
-    [HideInInspector]public Animator _animator;
+    protected Animator animator;
 
     public abstract void Death();
 
     private void Awake()
     {
         _currentHealth = _healthMax;
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     public void ApplyDamage(int damage)
