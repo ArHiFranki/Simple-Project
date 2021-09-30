@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    Transform Warrior;
-
-    private void Start()
-    {
-        Warrior = transform.root;
-    }
+    [SerializeField] [Header("Воин у которого в руках оружие")] private Transform Warrior;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,12 +12,14 @@ public class Weapon : MonoBehaviour
 
         if (Warrior.GetComponent<PlayerUnit>() && other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.ApplyDamage(Warrior.GetComponent<PlayerUnit>()._damage);
+            //enemy.ApplyDamage(Warrior.GetComponent<PlayerUnit>()._damage);
+            //enemy.ApplyDamage(10);
         }
 
         if (Warrior.GetComponent<Enemy>() && other.gameObject.TryGetComponent(out PlayerUnit playerUnit))
         {
-            playerUnit.ApplyDamage(Warrior.GetComponent<Enemy>()._damage);
+            //playerUnit.ApplyDamage(Warrior.GetComponent<Enemy>()._damage);
+            //playerUnit.ApplyDamage(10);
         }
     }
 }
