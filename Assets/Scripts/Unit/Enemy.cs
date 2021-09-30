@@ -42,7 +42,7 @@ public class Enemy : Unit
 
         Base[] _base = FindObjectsOfType<Base>();//Поиск всех объектов с компонентом Base
 
-        Transform ClosetBase = FindClosetBace(_base);
+        Transform ClosetBase = FindClosetBace(_base);//ближайщая база
 
         if (ClosedUnit != null) //если на сцене есть юниты игрока
         {
