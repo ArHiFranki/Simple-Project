@@ -5,10 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy : Unit
 {
-    [SerializeField] [Header("Минимальная дистанция до ктоторой можно подойти")] 
-    private float _distanceMin;
-    [SerializeField] [Header("Награда")] 
-    private int _reward;
+    [SerializeField] [Header("Награда")] private int _reward;
+    [SerializeField] private float _distanceMin;
     [SerializeField] private float _visibilityRadius;
 
     private GameController _gameController;
