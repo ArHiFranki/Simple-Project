@@ -37,11 +37,11 @@ public class Enemy : Unit
         //Поиск ближайшего юнита
         PlayerUnit[] PlayerUnits = FindObjectsOfType<PlayerUnit>();//Поиск всех объектов с компонентом PlayerUnit
 
-        Transform ClosedUnit = FindClosetUnit(PlayerUnits);//ближайший юнит
+        Transform ClosedUnit = FindNearestObject(PlayerUnits);//ближайший юнит
 
         Base[] _base = FindObjectsOfType<Base>();//Поиск всех объектов с компонентом Base
 
-        Transform ClosetBase = FindClosetBace(_base);
+        Transform ClosetBase = FindNearestObject(_base);
 
         if (ClosedUnit != null) //если на сцене есть юниты игрока
         {

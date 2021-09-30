@@ -40,7 +40,7 @@ public class Range : PlayerUnit
         //Поиск ближайшего юнита
         Enemy[] Enemies = FindObjectsOfType<Enemy>();//Поиск всех объектов с компонентом Enemy
 
-        Transform ClosedEnemy = FindClosetUnit(Enemies);//ближайший враг
+        Transform ClosedEnemy = FindNearestObject(Enemies);//ближайший враг
 
         if (ClosedEnemy != null) //если на сцене есть юниты игрока
         {
@@ -68,7 +68,8 @@ public class Range : PlayerUnit
     {
 
         Enemy[] Enemies = FindObjectsOfType<Enemy>();//Поиск всех объектов с компонентом Enemy
-        Transform ClosedEnemy = FindClosetUnit(Enemies);//ближайший враг
+
+        Transform ClosedEnemy = FindNearestObject(Enemies);//ближайший враг
          
         if(ClosedEnemy != null)
         {

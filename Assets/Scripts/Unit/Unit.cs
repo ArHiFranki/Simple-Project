@@ -42,53 +42,19 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    public Transform FindClosetUnit(PlayerUnit[] PlayerUnits)//Поиск и возвращение ближайшего юнита игрока
+    public Transform FindNearestObject(MonoBehaviour[] gameObjects)
     {
         float distance = Mathf.Infinity;
-        Transform closetUnit = null; //Ближайший 
+        Transform nearestObject = null;
 
-        foreach (PlayerUnit Unit in PlayerUnits) //перебор всех юнитов
+        foreach (MonoBehaviour gameObject in gameObjects)
         {
-            if (Vector3.Distance(Unit.transform.position, transform.position) < distance)
+            if (Vector3.Distance(gameObject.transform.position, transform.position) < distance)
             {
-                distance = Vector3.Distance(Unit.transform.position, transform.position);
-                closetUnit = Unit.transform;
+                distance = Vector3.Distance(gameObject.transform.position, transform.position);
+                nearestObject = gameObject.transform;
             }
         }
-        return closetUnit;
-    }
-
-    public Transform FindClosetUnit(Enemy[] PlayerUnits)//Поиск и возвращение ближайшего юнита врага
-    {
-
-        float distance = Mathf.Infinity;
-        Transform closetUnit = null; //Ближайший 
-
-        foreach (Enemy Unit in PlayerUnits) //перебор всех юнитов
-        {
-            if (Vector3.Distance(Unit.transform.position, transform.position) < distance)
-            {
-                distance = Vector3.Distance(Unit.transform.position, transform.position);
-                closetUnit = Unit.transform;
-            }
-        }
-        return closetUnit;
-    }
-
-    public Transform FindClosetBace(Base[] baseies)//Поиск и возвращение ближайшой базы
-    {
-
-        float distance = Mathf.Infinity;
-        Transform ClosetBase = null; //Ближайший 
-
-        foreach (Base _base in baseies) //перебор всех баз
-        {
-            if (Vector3.Distance(_base.transform.position, transform.position) < distance)
-            {
-                distance = Vector3.Distance(_base.transform.position, transform.position);
-                ClosetBase = _base.transform;
-            }
-        }
-        return ClosetBase;
+        return nearestObject;
     }
 }
