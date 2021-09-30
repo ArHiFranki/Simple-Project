@@ -234,11 +234,9 @@ MonoBehaviour:
   _healthMax: 10
   _currentHealth: 0
   _damage: 0
-  _animator: {fileID: 0}
-  minimalDistance: 2
-  radius: 5
   _reward: 10
-  _gameController: {fileID: 0}
+  _distanceMin: 1.5
+  _visibilityRadius: 6
 --- !u!1 &2508252202847485849
 GameObject:
   m_ObjectHideFlags: 0

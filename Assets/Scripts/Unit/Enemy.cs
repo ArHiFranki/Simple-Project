@@ -14,6 +14,8 @@ public class Enemy : Unit
     private float _nearestPlayerUnitDistance;
     private float _nearestBaseDistance;
 
+    private const string _attackTriggerName = "Atack";
+
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -21,7 +23,7 @@ public class Enemy : Unit
 
     private void Update()
     {
-        EnemyMovment();
+        EnemyMovement();
     }
 
     public override void Death()
@@ -29,50 +31,47 @@ public class Enemy : Unit
         _gameController.ChangeGold(_reward);
     }
 
-    private void EnemyMovment() //Перемещение врага
+    private void EnemyMovement()
     {
-        //Поиск ближайшего юнита
-        PlayerUnit[] PlayerUnits = FindObjectsOfType<PlayerUnit>();//Поиск всех объектов с компонентом PlayerUnit
+        PlayerUnit[] playerUnits = FindObjectsOfType<PlayerUnit>();
+        Base[] baseObjects = FindObjectsOfType<Base>();
 
-        Transform ClosedUnit = FindNearestObject(PlayerUnits);//ближайший юнит
+        Transform nearestUnit = FindNearestObject(playerUnits);
+        Transform nearestBase = FindNearestObject(baseObjects);
 
-        Base[] _base = FindObjectsOfType<Base>();//Поиск всех объектов с компонентом Base
-
-        Transform ClosetBase = FindNearestObject(_base);
-
-        if (ClosedUnit != null) //если на сцене есть юниты игрока
+        if (nearestUnit != null) 
         {
-            _nearestPlayerUnitDistance = Vector3.Distance(ClosedUnit.position, transform.position); //расчет дистанции до ближайшего юнита
+            // расчет дистанции до ближайшего юнита
+            _nearestPlayerUnitDistance = Vector3.Distance(nearestUnit.position, transform.position);
         }
 
-        _nearestBaseDistance = Vector3.Distance(ClosetBase.position, transform.position); //расчет дистанции до базы
+        // расчет дистанции до базы
+        _nearestBaseDistance = Vector3.Distance(nearestBase.position, transform.position);
 
-        if (ClosedUnit == null || _nearestPlayerUnitDistance > _visibilityRadius) //Если юнит игрока вне агрозоны или его нет
+        // Если юнит игрока вне агрозоны или его нет, то он идёт к базе, иначе идёт к юниту игрока
+        if (nearestUnit == null || _nearestPlayerUnitDistance > _visibilityRadius) 
         {
            _navMeshAgent.enabled = true;
-           _navMeshAgent.SetDestination(ClosetBase.position); //идет к базе 
+           _navMeshAgent.SetDestination(nearestBase.position);
         }
-        else if (_nearestPlayerUnitDistance < _visibilityRadius && _nearestPlayerUnitDistance > _distanceMin) //Если юнит в агрозоне
+        else if (_nearestPlayerUnitDistance < _visibilityRadius && _nearestPlayerUnitDistance > _distanceMin)
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(ClosedUnit.position);//Идет к юниту игрока
-          
+            _navMeshAgent.SetDestination(nearestUnit.position);
         }
 
         //Условия остановки врага
-        if (_nearestPlayerUnitDistance < _distanceMin && ClosedUnit != null)
+        if (_nearestPlayerUnitDistance < _distanceMin && nearestUnit != null)
         {
-            transform.LookAt(ClosedUnit); //Смотреть на Юнита
+            transform.LookAt(nearestUnit);
             _navMeshAgent.enabled = false;
-            animator.SetTrigger("Atack");
-
-
+            animator.SetTrigger(_attackTriggerName);
         }
-        if (_nearestBaseDistance < 2f && (ClosedUnit == null || _nearestPlayerUnitDistance > _visibilityRadius))
+        if (_nearestBaseDistance < _distanceMin && (nearestUnit == null || _nearestPlayerUnitDistance > _visibilityRadius))
         {
-            transform.LookAt(ClosetBase); //Смотреть на базу
+            transform.LookAt(nearestBase);
             _navMeshAgent.enabled = false;
-            animator.SetTrigger("Atack");
+            animator.SetTrigger(_attackTriggerName);
         }
     }
 

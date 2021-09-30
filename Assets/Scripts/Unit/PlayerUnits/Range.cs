@@ -21,7 +21,6 @@ public class Range : PlayerUnit
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-       // _animator = GetComponent<Animator>();
     }
 
 
