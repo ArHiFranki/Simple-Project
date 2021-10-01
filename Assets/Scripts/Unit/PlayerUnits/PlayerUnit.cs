@@ -11,7 +11,7 @@ public class PlayerUnit : Unit
     [Header("Меню выбора состояния")]
     public GameObject _statusSelectionMenu;
 
-    [HideInInspector]public Transform _defendPoint;
+    [HideInInspector] public Transform _defendPoint;
 
     public override void Death()
     {

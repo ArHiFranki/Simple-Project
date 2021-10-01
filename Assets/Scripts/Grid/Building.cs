@@ -5,16 +5,18 @@ using UnityEngine;
 //Скрипт здания
 public class Building : MonoBehaviour
 {
-    [Header("Размер здания на сетке")] public Vector2Int _gridBuildingSize = Vector2Int.one;
-    [HideInInspector]public int _statePosition = 0;
+    [Header("Размер здания на сетке")] 
+    public Vector2Int gridBuildingSize = Vector2Int.one;
+
+    [HideInInspector] public int _statePosition = 0;
 
     private Color _gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
 
-    //Задать цвет активному зданию
-    public void SetTransperent(bool available)
+    // Задать цвет активному зданию
+    public void SetTransperent(bool isAvailable)
     {
-        //если объект можно поставить
-        if (available)
+        // Если объект можно поставить
+        if (isAvailable)
         {
             _gizmosColor = Color.green;
         }
@@ -24,18 +26,18 @@ public class Building : MonoBehaviour
         }
     }
 
-    //Вернуть нормальный цвет
+    // Вернуть нормальный цвет
     public void SetNormalColor()
     {
         _gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
     }
 
-    //Отрисовка сетки объекта в сцене (Вспомогательно)
+    // Отрисовка сетки объекта в сцене (Вспомогательно)
     private void OnDrawGizmos()
     {
-        for (int x = 0; x < _gridBuildingSize.x; x++)
+        for (int x = 0; x < gridBuildingSize.x; x++)
         {
-            for (int y = 0; y < _gridBuildingSize.y; y++)
+            for (int y = 0; y < gridBuildingSize.y; y++)
             {
                 Gizmos.color = _gizmosColor;
                 if (_statePosition == 0 || _statePosition == 1)
@@ -50,11 +52,12 @@ public class Building : MonoBehaviour
         }
     }
 
-    //Вращение обьекта
+    // Вращение обьекта
     public void RotateBilding()
     {
-        float rotationAngle = 90;
-        //поворот объекта
+        float rotationAngle = 90f;
+
+        // Поворот объекта
         transform.Rotate(0,rotationAngle,0);
 
         if (_statePosition < 3)
@@ -66,9 +69,9 @@ public class Building : MonoBehaviour
             _statePosition = 0;
         }
 
-        //поворот сетки
-        int _newX = _gridBuildingSize.y;
-        int _newY = _gridBuildingSize.x;
-        _gridBuildingSize = new Vector2Int(_newX, _newY);
+        // Поворот сетки
+        int _newX = gridBuildingSize.y;
+        int _newY = gridBuildingSize.x;
+        gridBuildingSize = new Vector2Int(_newX, _newY);
     }
 }
