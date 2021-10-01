@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthMax: 10
   _currentHealth: 0
-  _damage: 2
+  damage: 2
   _reward: 10
   _distanceMin: 1.5
   _visibilityRadius: 6

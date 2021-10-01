@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthMax: 10
   _currentHealth: 0
-  _damage: 2
+  damage: 2
   _isUnitAtack: 0
   _isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4702141537437396107}
