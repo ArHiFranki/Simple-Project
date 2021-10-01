@@ -4,101 +4,106 @@ using UnityEngine;
 using UnityEngine.AI;
 public class Melee : PlayerUnit
 {
-    private NavMeshAgent nav;//Навмеш
-    private float distToEnemy; //дистанция до Ближайшего врага
+    private NavMeshAgent _navMeshAgent;
+    private float _nearestEnemyDistance;
 
-    [SerializeField] [Header("Минимальная дистанция до ктоторой можно подойти")]  private float minimalDistance;
-    [SerializeField] [Header("Агрорадиус")] float radius;
+    [SerializeField] [Header("Минимальная дистанция до ктоторой можно подойти")]
+    private float _minimalDistance;
+
+    [SerializeField] [Header("Агрорадиус")] 
+    private float _radius;
    
     void Start()
     {
-        nav = GetComponent<NavMeshAgent>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
-
-
 
     void Update()
     {
-        _statusSelectionMenu.transform.LookAt(Camera.main.transform);//направление на камеру
+        _statusSelectionMenu.transform.LookAt(Camera.main.transform);
 
-        if (_isUnitAtack) AtackStyle();
-        if(_isUnitDefend) DefenseStyle();
+        if (gameController.IsPreparationPhase != true)
+        {
+            if (_isUnitAtack) AtackStyle();
+            if (_isUnitDefend) DefenseStyle();
+        }
     }
 
-    private void AtackStyle() //Атака
+    private void AtackStyle()
     {
-        //Поиск ближайшего юнита
-        Enemy[] Enemies = FindObjectsOfType<Enemy>();//Поиск всех объектов с компонентом Enemy
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Transform closedEnemy = FindNearestObject(enemies);
 
-        Transform ClosedEnemy = FindNearestObject(Enemies);//ближайший враг
-
-        if (ClosedEnemy != null) //если на сцене есть юниты игрока
+        if (closedEnemy != null)
         {
-            distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
+            _nearestEnemyDistance = Vector3.Distance(closedEnemy.position, transform.position);
         }
         else return;
-       
-        if (distToEnemy > minimalDistance) //Если юнит в агрозоне
+
+        // Если юнит в агрозоне
+        if (_nearestEnemyDistance > _minimalDistance)
         {
-            nav.enabled = true;
-            nav.SetDestination(ClosedEnemy.position);//Идет к вражескому юниту
+            _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(closedEnemy.position);
         }
-        //Условия остановки врага
-        if (distToEnemy < minimalDistance)
+
+        // Условия остановки врага
+        if (_nearestEnemyDistance < _minimalDistance)
         {
-            transform.LookAt(ClosedEnemy); 
-            nav.enabled = false;
+            transform.LookAt(closedEnemy); 
+            _navMeshAgent.enabled = false;
             _animator.SetTrigger("Atack");
-            //arrowCreate(ClosedEnemy);
+            // _arrowCreate(ClosedEnemy);
         }
     }
 
-    private void DefenseStyle()//Защита
+    private void DefenseStyle()
     {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Transform closedEnemy = FindNearestObject(enemies);
 
-
-        Enemy[] Enemies = FindObjectsOfType<Enemy>();//Поиск всех объектов с компонентом Enemy
-        Transform ClosedEnemy = FindNearestObject(Enemies);//ближайший враг
-
-        if (ClosedEnemy != null)
+        if (closedEnemy != null)
         {
-            distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
+            _nearestEnemyDistance = Vector3.Distance(closedEnemy.position, transform.position);
         }
 
-        float distToDefendPoint = Vector3.Distance(_defendPoint.position, transform.position); //дистанция дозащишаемой точки
+        float distToDefendPoint = Vector3.Distance(_defendPoint.position, transform.position);
 
-        if (distToDefendPoint > 1 && ClosedEnemy != null)
+        if (distToDefendPoint > 1 && closedEnemy != null)
         {
-            if (distToEnemy > radius)//Идет к точке защиты
+            // Идет к точке защиты
+            if (_nearestEnemyDistance > _radius)
             {
-                nav.enabled = true;
-                nav.SetDestination(_defendPoint.position);
+                _navMeshAgent.enabled = true;
+                _navMeshAgent.SetDestination(_defendPoint.position);
             }
-            else if (distToEnemy < radius)//Идет к вражескому юниту
+            // Идет к вражескому юниту
+            else if (_nearestEnemyDistance < _radius)
             {
-                nav.enabled = true;
-                nav.SetDestination(ClosedEnemy.position);
+                _navMeshAgent.enabled = true;
+                _navMeshAgent.SetDestination(closedEnemy.position);
             }
 
-            if (distToEnemy < minimalDistance)//Атакует вражеского юнита
+            // Атакует вражеского юнита
+            if (_nearestEnemyDistance < _minimalDistance)
             {
-                transform.LookAt(ClosedEnemy);
-                nav.enabled = false;
+                transform.LookAt(closedEnemy);
+                _navMeshAgent.enabled = false;
                 _animator.SetTrigger("Atack");
-                //arrowCreate(ClosedEnemy);
+                // _arrowCreate(ClosedEnemy);
             }
         }
-        else if (distToDefendPoint > 1 && ClosedEnemy == null)
+        else if (distToDefendPoint > 1 && closedEnemy == null)
         {
-            nav.enabled = true;
-            nav.SetDestination(_defendPoint.position);
+            _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(_defendPoint.position);
         }
-        else if (distToDefendPoint < 1 && ClosedEnemy != null && distToEnemy < minimalDistance)
+        else if (distToDefendPoint < 1 && closedEnemy != null && _nearestEnemyDistance < _minimalDistance)
         {
-            transform.LookAt(ClosedEnemy);
-            nav.enabled = false;
+            transform.LookAt(closedEnemy);
+            _navMeshAgent.enabled = false;
             _animator.SetTrigger("Atack");
-            //arrowCreate(ClosedEnemy);
+            // _arrowCreate(ClosedEnemy);
         }
     }
 }

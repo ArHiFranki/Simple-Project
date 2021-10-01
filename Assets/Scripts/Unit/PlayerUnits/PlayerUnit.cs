@@ -13,6 +13,7 @@ public class PlayerUnit : Unit
 
     [HideInInspector] public Transform _defendPoint;
 
+    public int unitPrice;
     public override void Death()
     {
         Destroy(gameObject);

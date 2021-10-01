@@ -9,7 +9,6 @@ public class Enemy : Unit
     [SerializeField] private float _distanceMin;
     [SerializeField] private float _visibilityRadius;
 
-    private GameController _gameController;
     private NavMeshAgent _navMeshAgent;
     private float _nearestPlayerUnitDistance;
     private float _nearestBaseDistance;
@@ -28,7 +27,7 @@ public class Enemy : Unit
 
     public override void Death()
     {
-        _gameController.ChangeGold(_reward);
+        gameController.ChangeGold(_reward);
         Destroy(gameObject);
     }
 
@@ -74,10 +73,5 @@ public class Enemy : Unit
             _navMeshAgent.enabled = false;
             _animator.SetTrigger(_attackTriggerName);
         }
-    }
-
-    public void InitEnemy(GameController gameController)
-    {
-        _gameController = gameController;
     }
 }

@@ -9,6 +9,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private int _currentHealth;
 
     public int damage;
+    [HideInInspector] public GameController gameController;
 
     protected Animator _animator;
 
@@ -57,5 +58,10 @@ public abstract class Unit : MonoBehaviour
             }
         }
         return nearestObject;
+    }
+
+    public void InitUnit(GameController game_Controller)
+    {
+        gameController = game_Controller;
     }
 }

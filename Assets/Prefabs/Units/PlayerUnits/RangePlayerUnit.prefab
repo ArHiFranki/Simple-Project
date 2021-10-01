@@ -273,16 +273,18 @@ MonoBehaviour:
   _healthMax: 10
   _currentHealth: 0
   damage: 2
+  gameController: {fileID: 0}
   _isUnitAtack: 0
   _isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4702141537437396107}
   _defendPoint: {fileID: 0}
+  unitPrice: 20
   _distanceMin: 7
   _radius: 10
   _fireRate: 1
   _bulletSpeed: 7
-  _bulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
-  _bulletStartPosition: {fileID: 2904359424954249292}
+  bulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
+  bulletStartPosition: {fileID: 2904359424954249292}
 --- !u!114 &757390202873875546
 MonoBehaviour:
   m_ObjectHideFlags: 0

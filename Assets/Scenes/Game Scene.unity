@@ -7165,6 +7165,7 @@ MonoBehaviour:
   _cellOnGrid: {fileID: 4161744744832001138, guid: 76e1acb885873b2419faeddd282b62a1, type: 3}
   _cellParent1: {fileID: 2021683517}
   _cellParent2: {fileID: 2060732246}
+  _gameController: {fileID: 284352319}
 --- !u!4 &1935077492
 Transform:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
                                      _spawnPoints[randomNumber].position, 
                                      _spawnPoints[randomNumber].rotation, 
                                      _spawnPoints[randomNumber]);
-        tmpEnemy.InitEnemy(_gameController);
+        tmpEnemy.InitUnit(_gameController);
     }
 
     private void SetWave(int index)

@@ -109,12 +109,14 @@ MonoBehaviour:
   _healthMax: 20
   _currentHealth: 0
   damage: 2
+  gameController: {fileID: 0}
   _isUnitAtack: 0
   _isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4398403818420525923}
   _defendPoint: {fileID: 0}
-  minimalDistance: 2
-  radius: 0
+  unitPrice: 10
+  _minimalDistance: 1.5
+  _radius: 5
 --- !u!114 &3744180325558021206
 MonoBehaviour:
   m_ObjectHideFlags: 0

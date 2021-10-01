@@ -21,6 +21,8 @@ public class BildingsGrid : MonoBehaviour
     [SerializeField][Header("Контейнер для ячеек второй половины поля")]
     private GameObject _cellParent2;
 
+    [SerializeField] private GameController _gameController;
+
     private int _statePosition;
 
     // Активное (выбранное) здание 
@@ -89,6 +91,11 @@ public class BildingsGrid : MonoBehaviour
         }
 
         _flyingBilding = Instantiate(bildingPrefab);
+        if (_flyingBilding.TryGetComponent(out PlayerUnit playerUnit))
+        {
+            playerUnit.InitUnit(_gameController);
+        }
+
     }
 
     // Размещение здания
@@ -222,10 +229,11 @@ public class BildingsGrid : MonoBehaviour
         // Задать нормальный цвет сетке активного здания
         _flyingBilding.SetNormalColor();
 
-        if (_flyingBilding.GetComponent<PlayerUnit>() && _unitflyingBilding == null)
+        if (_flyingBilding.TryGetComponent(out PlayerUnit playerUnit) && _unitflyingBilding == null)
         {
             // Запомнит юнита для дальнейщего выбора поведения
             _unitflyingBilding = _flyingBilding;
+            _gameController.ChangeGold(-playerUnit.unitPrice);
         }
 
         _flyingBilding = null;
