@@ -10,12 +10,12 @@ public class Weapon : MonoBehaviour
     {
         if (_warrior.GetComponent<PlayerUnit>() && other.gameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.ApplyDamage(_warrior.GetComponent<PlayerUnit>()._damage);
+            enemy.ApplyDamage(_warrior.GetComponent<PlayerUnit>().damage);
         }
 
         if (_warrior.GetComponent<Enemy>() && other.gameObject.TryGetComponent(out PlayerUnit playerUnit))
         {
-            playerUnit.ApplyDamage(_warrior.GetComponent<Enemy>()._damage);
+            playerUnit.ApplyDamage(_warrior.GetComponent<Enemy>().damage);
         }
     }
 }

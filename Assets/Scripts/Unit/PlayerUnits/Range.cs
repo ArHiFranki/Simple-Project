@@ -134,7 +134,7 @@ public class Range : PlayerUnit
             Arrow arrow = NewArrow.GetComponent<Arrow>();
             arrow.Target = closedEnemy;
             arrow._speed = _bulletSpeed;
-            arrow.Damage = _damage;
+            arrow.Damage = damage;
            
             _timeAfterLastShot = 0;
         }

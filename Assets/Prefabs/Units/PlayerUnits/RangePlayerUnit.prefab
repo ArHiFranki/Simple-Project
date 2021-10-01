@@ -270,9 +270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe2cacf708f75d49a84d584198e53f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthMax: 0
+  _healthMax: 10
   _currentHealth: 0
-  _damage: 0
+  _damage: 2
   _isUnitAtack: 0
   _isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4702141537437396107}
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ec247ad6ee1d14ea297024550cdc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridBuildingSize: {x: 1, y: 1}
+  gridBuildingSize: {x: 1, y: 1}
   _statePosition: 0
 --- !u!1 &7393076858591129586
 GameObject:

@@ -8,7 +8,7 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private int _healthMax;
     [SerializeField] private int _currentHealth;
 
-    public int _damage;
+    public int damage;
 
     protected Animator _animator;
 

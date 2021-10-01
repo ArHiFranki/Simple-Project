@@ -15,7 +15,7 @@ public class PlayerUnit : Unit
 
     public override void Death()
     {
-        Debug.Log("PlayerUnit Death");
+        Destroy(gameObject);
     }
 
     public void IsUnitAtack()

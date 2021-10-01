@@ -29,6 +29,7 @@ public class Enemy : Unit
     public override void Death()
     {
         _gameController.ChangeGold(_reward);
+        Destroy(gameObject);
     }
 
     private void EnemyMovement()
