@@ -4,24 +4,42 @@ using UnityEngine;
 
 public class BildingsGrid : MonoBehaviour
 {
-    public Vector2Int GridSize = new Vector2Int(10, 10);//Размер сетки
+    //Размер сетки
+    public Vector2Int _gridSize = new Vector2Int(10, 10);
+
+    private Camera _mainCamera;
+
     [SerializeField][Header("Область размещения юнитов")]
     private int _deployGridSize;
 
     [SerializeField][Header("Целевая точка юнита при выборе защитного состояния")]
-    private Building targetPoint;
+    private Building _targetPoint;
 
     [SerializeField][Header("Ячейка на сетке")]
-    private GameObject cellOnGrid;
+    private GameObject _cellOnGrid;
 
     [SerializeField][Header("Коробка для ячеек первой половины поля")]
-    private GameObject cellParent1;
+    private GameObject _cellParent1;
 
     [SerializeField][Header("Коробка для ячеек второй половины поля")]
-    private GameObject cellParent2;
+    private GameObject _cellParent2;
 
+    private int _statePosition;
 
+    //Активное (выбранное) здание 
+    private Building _flyingBilding;
+
+    //Юнит которому нужно задать цель
+    private Building _unitflyingBilding;
+
+    //Двумерный массив зданий
+    private Building[,] _buildingGrid;
+
+    //ячейки на стке для отоброжения свободного и занятого места
+    private GameObject[,] _cellsOnGrid;
+       
     /*
+    проверочные поля
     [SerializeField] private int _cursorPositionX;
     [SerializeField] private int _cursorPositionY;
     [SerializeField] private int _gridSizaX;
@@ -30,46 +48,35 @@ public class BildingsGrid : MonoBehaviour
     [SerializeField] private int _flyingBildingSizeY;
     */
 
-    private int _statePosition;
-    private Building[,] grid;//Двумерный массив зданий
-
-    private Building flyingBilding;//Активное (выбранное) здание 
-
-    private Building UnitflyingBilding;//Юнит которому нужно задать цель
-    private Camera mainCamera;//Камера
-
-    private GameObject[,] cells; //ячейки для отоброжения
 
     private void Awake()
     {
-        grid = new Building[GridSize.x, GridSize.y];//Инициализация массива размещенных оюъектов
-        cells = new GameObject[GridSize.x, GridSize.y];
+        //Инициализация массива размещенных оюъектов
+        _buildingGrid = new Building[_gridSize.x, _gridSize.y];
+        _cellsOnGrid = new GameObject[_gridSize.x, _gridSize.y];
+        _mainCamera = Camera.main;
 
-        mainCamera = Camera.main;
-
-        DisplayingСells();//отображение ячеек
-        cellParent1.SetActive(false);
-        cellParent2.SetActive(false);
-
+        //отображение ячеек
+        DisplayingСells();
+        CelParentSetActive(false);
     }
 
     private void Update()
     {
-        PlaceBuilding();//Размещение  здания
-        if (UnitflyingBilding != null)
+        //Размещение  здания
+        PlaceBuilding();
+        if (_unitflyingBilding != null)
         {
             SetDefendPoint();
         }
-
-      
     }
 
-
-    private void OnDrawGizmos()//Отрисовка сетки объекта в сцене (Вспомогательно)
+    //Отрисовка сетки объекта в сцене (Вспомогательно)
+    private void OnDrawGizmos()
     {
-        for (int x = 0; x < GridSize.x; x++)
+        for (int x = 0; x < _gridSize.x; x++)
         {
-            for (int y = 0; y < GridSize.y; y++)
+            for (int y = 0; y < _gridSize.y; y++)
             {
                 Gizmos.color = new Color(0.88f, 0.5f, 0.3f, 0.3f);
                 Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1, 0.1f, 1));
@@ -77,40 +84,46 @@ public class BildingsGrid : MonoBehaviour
         }
     }
 
-    public void StartPlacingBilding(Building BildingPrefab) //Спавн активного (выбранного) здания
+    //Спавн активного (выбранного) здания
+    public void StartPlacingBilding(Building BildingPrefab) 
     {
-        if (flyingBilding != null) //Если уже есть активное здание, удалить его
+        if (_flyingBilding != null) 
         {
-            Destroy(flyingBilding.gameObject);
+            Destroy(_flyingBilding.gameObject);
         }
-
-        flyingBilding = Instantiate(BildingPrefab);//Создание обьекта
+        _flyingBilding = Instantiate(BildingPrefab);
     }
 
-    private void PlaceBuilding()//Размещение 
+    //Размещение здания
+    private void PlaceBuilding()
     {
-        if (flyingBilding != null)
+        if (_flyingBilding != null)
         {
-            if (Input.GetKeyDown(KeyCode.R)) //Поворот здания
+            //Поворот здания
+            if (Input.GetKeyDown(KeyCode.R)) 
             {
-                flyingBilding.RotateBilding();
+                _flyingBilding.RotateBilding();
             }
 
-            var groundPlane = new Plane(Vector3.up, Vector3.zero); //плоскость
-            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);//Луч
+            //плоскость
+            var groundPlane = new Plane(Vector3.up, Vector3.zero);
+            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (groundPlane.Raycast(ray, out float position))//проверка пересечения луча и плоскости
+            //проверка пересечения луча и плоскости
+            if (groundPlane.Raycast(ray, out float position))
             {
-                Vector3 worldosition = ray.GetPoint(position);//положение курсора
+                //положение курсора
+                Vector3 worldosition = ray.GetPoint(position);
 
                 //Округление координат
                 int cursorPositionX = Mathf.RoundToInt(worldosition.x);
                 int cursorPositionY = Mathf.RoundToInt(worldosition.z);
-                
 
-                bool available = true; //можно ли поставить здание
+                //можно ли поставить здание
+                bool available = true; 
 
                 /*
+                 заполнение проверочных полей
                 _cursorPositionX = cursorPositionX;
                 _cursorPositionY = cursorPositionY;
                 _gridSizaX = GridSize.x;
@@ -119,159 +132,168 @@ public class BildingsGrid : MonoBehaviour
                 _flyingBildingSizeY = flyingBilding.Size.y;
                 */
 
+                _statePosition = _flyingBilding._statePosition;
 
-                _statePosition = flyingBilding.statePosition;
                 if (_statePosition == 0 || _statePosition == 1)
                 {
-                    if (cursorPositionX < 0 || cursorPositionX > GridSize.x - flyingBilding.Size.x) available = false;
-                    if (cursorPositionY < 0 || cursorPositionY > GridSize.y - flyingBilding.Size.y) available = false;
+                    if (cursorPositionX < 0 || cursorPositionX > _gridSize.x - _flyingBilding._gridBuildingSize.x) available = false;
+                    if (cursorPositionY < 0 || cursorPositionY > _gridSize.y - _flyingBilding._gridBuildingSize.y) available = false;
                 }
-
-                if (_statePosition == 2 || _statePosition == 3)
+                else if (_statePosition == 2 || _statePosition == 3)
                 {
-                    if (cursorPositionX - flyingBilding.Size.x < -1) available = false;
-                    if (cursorPositionY - flyingBilding.Size.y < -1) available = false;
-                    if (cursorPositionX >= GridSize.x) available = false;
-                    if (cursorPositionY >= GridSize.y) available = false;
-
+                    if (cursorPositionX - _flyingBilding._gridBuildingSize.x < -1) available = false;
+                    if (cursorPositionY - _flyingBilding._gridBuildingSize.y < -1) available = false;
+                    if (cursorPositionX >= _gridSize.x) available = false;
+                    if (cursorPositionY >= _gridSize.y) available = false;
                 }
-
-               if (flyingBilding.GetComponent<PlayerUnit>()) 
+ 
+                if (_flyingBilding.GetComponent<PlayerUnit>()) 
                 {
                     if (cursorPositionY >= _deployGridSize) available = false;
                 }
 
                 if (available && IsPlaceTaken(cursorPositionX, cursorPositionY)) available = false;
 
+                //Задание кооринат активному зданию
+                _flyingBilding.transform.position = new Vector3(cursorPositionX, 0, cursorPositionY);
 
-                flyingBilding.transform.position = new Vector3(cursorPositionX, 0, cursorPositionY);//Задание кооринат активному зданию
-                flyingBilding.SetTransperent(available);//Задать цвет активному зданию
+                //Смена цвета сетки активного здания
+                _flyingBilding.SetTransperent(available);
 
                 if (available && Input.GetMouseButtonDown(0))
                 {
-                    PlaceFlyingBilding(cursorPositionX, cursorPositionY);//поставаить здание
+                    PlaceFlyingBilding(cursorPositionX, cursorPositionY);
                 }
             }
         }
     }
 
-    private bool IsPlaceTaken (int placeX, int placeY) //Если место занято
+    //Если место занято
+    private bool IsPlaceTaken (int placeX, int placeY) 
     {
         if (_statePosition == 0 || _statePosition == 1)
         {
-            for (int x = 0; x < flyingBilding.Size.x; x++)
+            for (int x = 0; x < _flyingBilding._gridBuildingSize.x; x++)
             {
-                for (int y = 0; y < flyingBilding.Size.y; y++)
-                {
-                    if (grid[placeX + x, placeY + y] != null) return true; //если клетка занята
+                for (int y = 0; y < _flyingBilding._gridBuildingSize.y; y++)
+                { 
+                    //если клетка занята
+                    if (_buildingGrid[placeX + x, placeY + y] != null) return true; 
                 }
             }
         }
-
-        if (_statePosition == 2 || _statePosition == 3)
+        else if (_statePosition == 2 || _statePosition == 3)
         {
-            for (int x = 0; x < flyingBilding.Size.x; x++)
+            for (int x = 0; x < _flyingBilding._gridBuildingSize.x; x++)
             {
-                for (int y = 0; y < flyingBilding.Size.y; y++)
+                for (int y = 0; y < _flyingBilding._gridBuildingSize.y; y++)
                 {
-                    if (grid[placeX - x, placeY - y] != null) return true; //если клетка занята
+                    //если клетка занята
+                    if (_buildingGrid[placeX - x, placeY - y] != null) return true; 
                 }
             }
         }
         return false;
     }
 
-    void PlaceFlyingBilding(int placeX, int placeY) //поставаить здание
+    //поставаить здание
+    void PlaceFlyingBilding(int placeX, int placeY) 
     {
-        if (_statePosition == 0 || _statePosition == 1)//первое и второе положения
+        if (_statePosition == 0 || _statePosition == 1)
         {
-            for (int x = 0; x < flyingBilding.Size.x; x++)
+            for (int x = 0; x < _flyingBilding._gridBuildingSize.x; x++)
             {
-                for (int y = 0; y < flyingBilding.Size.y; y++)
+                for (int y = 0; y < _flyingBilding._gridBuildingSize.y; y++)
                 {
-                    celColorChaige(cells[placeX +x, placeY + y],true);
-                    grid[placeX + x, placeY + y] = flyingBilding;
+                    celColorChaige(_cellsOnGrid[placeX +x, placeY + y],true);
+                    _buildingGrid[placeX + x, placeY + y] = _flyingBilding;
                 }
             }
         }
-        if (_statePosition == 2 || _statePosition == 3)//третье и четвертое положение
+        else if (_statePosition == 2 || _statePosition == 3)
         {
-            for (int x = 0; x < flyingBilding.Size.x; x++)
+            for (int x = 0; x < _flyingBilding._gridBuildingSize.x; x++)
             {
-                for (int y = 0; y < flyingBilding.Size.y; y++)
+                for (int y = 0; y < _flyingBilding._gridBuildingSize.y; y++)
                 {
-                    celColorChaige(cells[placeX - x, placeY - y], true);
-                    grid[placeX - x, placeY - y] = flyingBilding;
+                    celColorChaige(_cellsOnGrid[placeX - x, placeY - y], true);
+                    _buildingGrid[placeX - x, placeY - y] = _flyingBilding;
                 }
             }
         }
 
-        flyingBilding.SetNormalColor();//Задать нормальный цвет
+        //Задать нормальный цвет сетке активного здания
+        _flyingBilding.SetNormalColor();
 
-        
-        if (flyingBilding.GetComponent<PlayerUnit>() && UnitflyingBilding == null)
+        if (_flyingBilding.GetComponent<PlayerUnit>() && _unitflyingBilding == null)
         {
-            UnitflyingBilding = flyingBilding;//Сохраняем юнита
+            //Запомнит юнита для дальнейщего выбора поведения
+            _unitflyingBilding = _flyingBilding;
         }
 
-        
-        flyingBilding = null;//Поставить здание
-        CelParentSetActive(false);
-       
+        _flyingBilding = null;
+        CelParentSetActive(false);       
     }
 
-    void SetDefendPoint()//установить оборонительную точку
+    //установить оборонительную точку
+    void SetDefendPoint()
     {
-        PlayerUnit playerUnit= UnitflyingBilding.GetComponent<PlayerUnit>();
+        PlayerUnit playerUnit = _unitflyingBilding.GetComponent<PlayerUnit>();
 
-        if (playerUnit.isUnitAtack)
+        if (playerUnit._isUnitAtack)
         {
-            UnitflyingBilding = null;
+            _unitflyingBilding = null;
         }
-        if (playerUnit.isUnitDefend)
+        else if (playerUnit._isUnitDefend)
         {
             CelParentSetActive(true);
-           
-            flyingBilding = Instantiate(targetPoint);//Создание обьекта
-            playerUnit.defendPoint = flyingBilding.transform;
-            UnitflyingBilding = null;
+
+            //Создание целевой точки
+            _flyingBilding = Instantiate(_targetPoint);
+            playerUnit._defendPoint = _flyingBilding.transform;
+            _unitflyingBilding = null;
         }
-        
     }
 
-    void DisplayingСells()//отображение ячеек
+    //отображение ячеек
+    void DisplayingСells()
     {
-        for (int i = 0; i < GridSize.x; i++)
+        for (int i = 0; i < _gridSize.x; i++)
         {
-            for (int j = 0; j < GridSize.y; j++)
+            for (int j = 0; j < _gridSize.y; j++)
             {
                 Vector3 cellPosition = transform.position + new Vector3(i, 0, j);
 
-                if (j <_deployGridSize)
+                if (j < _deployGridSize)
                 {
-                    cells[i, j] = Instantiate(cellOnGrid, cellParent1.transform);
+                    _cellsOnGrid[i, j] = Instantiate(_cellOnGrid, _cellParent1.transform);
                 }
-                else cells[i, j] = Instantiate(cellOnGrid, cellParent2.transform);
-
-                cells[i, j].transform.position = cellPosition;
-
+                else
+                {
+                    _cellsOnGrid[i, j] = Instantiate(_cellOnGrid, _cellParent2.transform);
+                }
+                _cellsOnGrid[i, j].transform.position = cellPosition;
             }
         }
     }
-    
-    void celColorChaige(GameObject _cell, bool taken)//смена цвета ячейки 
+
+    //смена цвета ячейки 
+    void celColorChaige(GameObject _cell, bool taken)
     {
         Renderer cellRenderer = _cell.GetComponent<Renderer>();
         if (taken)
         {
             cellRenderer.material.color = Color.red;
-        }else cellRenderer.material.color = Color.green;
-
+        }
+        else
+        {
+            cellRenderer.material.color = Color.green;
+        }
     }
 
     void CelParentSetActive(bool active)
     { 
-       cellParent1.SetActive(active);
-       cellParent2.SetActive(active);   
+       _cellParent1.SetActive(active);
+       _cellParent2.SetActive(active);   
     }
 }

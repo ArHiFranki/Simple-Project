@@ -65,13 +65,13 @@ public class Enemy : Unit
         {
             transform.LookAt(nearestUnit);
             _navMeshAgent.enabled = false;
-            animator.SetTrigger(_attackTriggerName);
+            _animator.SetTrigger(_attackTriggerName);
         }
         if (_nearestBaseDistance < _distanceMin && (nearestUnit == null || _nearestPlayerUnitDistance > _visibilityRadius))
         {
             transform.LookAt(nearestBase);
             _navMeshAgent.enabled = false;
-            animator.SetTrigger(_attackTriggerName);
+            _animator.SetTrigger(_attackTriggerName);
         }
     }
 

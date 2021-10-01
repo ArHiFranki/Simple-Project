@@ -6442,12 +6442,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d5ca5a08cfdb146ac574a2ca26da25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridSize: {x: 7, y: 14}
+  _gridSize: {x: 7, y: 14}
   _deployGridSize: 3
-  targetPoint: {fileID: 8561352448266905544, guid: 48f2e674090f0f3428738090b28aa158, type: 3}
-  cellOnGrid: {fileID: 4161744744832001138, guid: 76e1acb885873b2419faeddd282b62a1, type: 3}
-  cellParent1: {fileID: 2021683517}
-  cellParent2: {fileID: 2060732246}
+  _targetPoint: {fileID: 8561352448266905544, guid: 48f2e674090f0f3428738090b28aa158, type: 3}
+  _cellOnGrid: {fileID: 4161744744832001138, guid: 76e1acb885873b2419faeddd282b62a1, type: 3}
+  _cellParent1: {fileID: 2021683517}
+  _cellParent2: {fileID: 2060732246}
 --- !u!4 &1935077492
 Transform:
   m_ObjectHideFlags: 0
@@ -6903,7 +6903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.335, y: 0.6447022}
   m_AnchorMax: {x: 0.666, y: 0.74}
-  m_AnchoredPosition: {x: 4.200012, y: -6.1999054}
+  m_AnchoredPosition: {x: 4.200012, y: -6.19989}
   m_SizeDelta: {x: -1.3948059, y: -3.3482056}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2018172284

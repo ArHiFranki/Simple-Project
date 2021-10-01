@@ -19,10 +19,10 @@ public class Melee : PlayerUnit
 
     void Update()
     {
-        statusSelectionMenu.transform.LookAt(Camera.main.transform);//направление на камеру
+        _statusSelectionMenu.transform.LookAt(Camera.main.transform);//направление на камеру
 
-        if (isUnitAtack) AtackStyle();
-        if(isUnitDefend) DefenseStyle();
+        if (_isUnitAtack) AtackStyle();
+        if(_isUnitDefend) DefenseStyle();
     }
 
     private void AtackStyle() //Атака
@@ -48,7 +48,7 @@ public class Melee : PlayerUnit
         {
             transform.LookAt(ClosedEnemy); 
             nav.enabled = false;
-            animator.SetTrigger("Atack");
+            _animator.SetTrigger("Atack");
             //arrowCreate(ClosedEnemy);
         }
     }
@@ -65,14 +65,14 @@ public class Melee : PlayerUnit
             distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
         }
 
-        float distToDefendPoint = Vector3.Distance(defendPoint.position, transform.position); //дистанция дозащишаемой точки
+        float distToDefendPoint = Vector3.Distance(_defendPoint.position, transform.position); //дистанция дозащишаемой точки
 
         if (distToDefendPoint > 1 && ClosedEnemy != null)
         {
             if (distToEnemy > radius)//Идет к точке защиты
             {
                 nav.enabled = true;
-                nav.SetDestination(defendPoint.position);
+                nav.SetDestination(_defendPoint.position);
             }
             else if (distToEnemy < radius)//Идет к вражескому юниту
             {
@@ -84,20 +84,20 @@ public class Melee : PlayerUnit
             {
                 transform.LookAt(ClosedEnemy);
                 nav.enabled = false;
-                animator.SetTrigger("Atack");
+                _animator.SetTrigger("Atack");
                 //arrowCreate(ClosedEnemy);
             }
         }
         else if (distToDefendPoint > 1 && ClosedEnemy == null)
         {
             nav.enabled = true;
-            nav.SetDestination(defendPoint.position);
+            nav.SetDestination(_defendPoint.position);
         }
         else if (distToDefendPoint < 1 && ClosedEnemy != null && distToEnemy < minimalDistance)
         {
             transform.LookAt(ClosedEnemy);
             nav.enabled = false;
-            animator.SetTrigger("Atack");
+            _animator.SetTrigger("Atack");
             //arrowCreate(ClosedEnemy);
         }
     }

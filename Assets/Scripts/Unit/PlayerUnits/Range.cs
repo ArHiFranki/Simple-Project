@@ -5,58 +5,73 @@ using UnityEngine.AI;
 
 public class Range : PlayerUnit
 {
-    
+    [SerializeField]
+    [Header("Минимальная дистанция до ктоторой можно подойти")]
+    private float _distanceMin;
 
-    private NavMeshAgent nav;//Навмеш
-    private float distToEnemy; //дистанция до Ближайшего врага
+    [SerializeField]
+    [Header("Агрорадиус")]
+    float _radius;
 
-    [SerializeField] [Header("Минимальная дистанция до ктоторой можно подойти")] private float minimalDistance;
-    [SerializeField] [Header("Агрорадиус")] float radius;
+    [SerializeField] [Header("Скорострельность")]
+    float _fireRate;
+
+    [Header("Скорость пули")] 
+    public float _bulletSpeed;
+
+    private NavMeshAgent _navMeshAgent;
+    private float _nearestEnemyDistance;
     
-    [Header("Префаб снаряда")] public GameObject BulletPrefab;
-    [Header("Оружие")] public GameObject BulletStartPosition;
-    [Header("Скорость пули")] public float bulletSpeed;
-    [SerializeField] [Header("Скорострельность")] float fireRate;
-    private float timeAfterLastShot; //время после последнего выстрела
+    [Header("Префаб снаряда")]
+    public GameObject _bulletPrefab;
+
+    [Header("Оружие")]
+    public GameObject _bulletStartPosition;
+   
+    //время после последнего выстрела
+    private float _timeAfterLastShot; 
+    
     void Start()
     {
-        nav = GetComponent<NavMeshAgent>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
 
 
     void Update()
     {
-        statusSelectionMenu.transform.LookAt(Camera.main.transform);//направление на камеру
+        //направление на камеру
+        _statusSelectionMenu.transform.LookAt(Camera.main.transform);
 
-        timeAfterLastShot += Time.deltaTime;
-        if (isUnitAtack) AtackStyle();
-        if (isUnitDefend && defendPoint != null) DefenseStyle();
+        _timeAfterLastShot += Time.deltaTime;
+        if (_isUnitAtack) AtackStyle();
+        if (_isUnitDefend && _defendPoint != null) DefenseStyle();
     }
 
-    private void AtackStyle() //Атака
+    //Атака
+    private void AtackStyle()
     {
         //Поиск ближайшего юнита
-        Enemy[] Enemies = FindObjectsOfType<Enemy>();//Поиск всех объектов с компонентом Enemy
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
 
-        Transform ClosedEnemy = FindNearestObject(Enemies);//ближайший враг
+        Transform ClosedEnemy = FindNearestObject(enemies);//ближайший враг
 
         if (ClosedEnemy != null) //если на сцене есть юниты игрока
         {
-            distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
+            _nearestEnemyDistance = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
         }
         else return;
 
-        if (distToEnemy > minimalDistance) //Если юнит в агрозоне
+        if (_nearestEnemyDistance > _distanceMin) //Если юнит в агрозоне
         {
-            nav.enabled = true;
-            nav.SetDestination(ClosedEnemy.position);//Идет к вражескому юниту
+            _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(ClosedEnemy.position);//Идет к вражескому юниту
         }
         //Условия остановки врага
-        if (distToEnemy < minimalDistance)
+        if (_nearestEnemyDistance < _distanceMin)
         {
             transform.LookAt(ClosedEnemy);
-            nav.enabled = false;
+            _navMeshAgent.enabled = false;
             //_animator.SetTrigger("Atack");
             arrowCreate(ClosedEnemy);
 
@@ -72,41 +87,41 @@ public class Range : PlayerUnit
          
         if(ClosedEnemy != null)
         {
-          distToEnemy = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
+          _nearestEnemyDistance = Vector3.Distance(ClosedEnemy.position, transform.position); //расчет дистанции до ближайшего врага
         }
 
-        float distToDefendPoint = Vector3.Distance(defendPoint.position, transform.position); //дистанция дозащишаемой точки
+        float distToDefendPoint = Vector3.Distance(_defendPoint.position, transform.position); //дистанция дозащишаемой точки
 
         if (distToDefendPoint > 1 && ClosedEnemy != null)
         {
-            if (distToEnemy > radius)//Идет к точке защиты
+            if (_nearestEnemyDistance > _radius)//Идет к точке защиты
             {
-                nav.enabled = true;
-                nav.SetDestination(defendPoint.position);
+                _navMeshAgent.enabled = true;
+                _navMeshAgent.SetDestination(_defendPoint.position);
             }
-            else if (distToEnemy < radius)//Идет к вражескому юниту
+            else if (_nearestEnemyDistance < _radius)//Идет к вражескому юниту
             {
-                nav.enabled = true;
-                nav.SetDestination(ClosedEnemy.position);
+                _navMeshAgent.enabled = true;
+                _navMeshAgent.SetDestination(ClosedEnemy.position);
             }
 
-            if (distToEnemy < minimalDistance)//Атакует вражеского юнита
+            if (_nearestEnemyDistance < _distanceMin)//Атакует вражеского юнита
             {
                 transform.LookAt(ClosedEnemy);
-                nav.enabled = false;
+                _navMeshAgent.enabled = false;
                 //_animator.SetTrigger("Atack");
                 arrowCreate(ClosedEnemy);
             }
         }
         else if (distToDefendPoint > 1 && ClosedEnemy == null)
         {
-            nav.enabled = true;
-            nav.SetDestination(defendPoint.position);
+            _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(_defendPoint.position);
         }
-        else if (distToDefendPoint < 1 && ClosedEnemy != null && distToEnemy < minimalDistance)
+        else if (distToDefendPoint < 1 && ClosedEnemy != null && _nearestEnemyDistance < _distanceMin)
         {
             transform.LookAt(ClosedEnemy);
-            nav.enabled = false;
+            _navMeshAgent.enabled = false;
             //_animator.SetTrigger("Atack");
             arrowCreate(ClosedEnemy);
         }
@@ -114,14 +129,14 @@ public class Range : PlayerUnit
 
     private void arrowCreate(Transform closedEnemy)
     {
-        if (timeAfterLastShot >= fireRate) {
-            GameObject NewArrow = Instantiate(BulletPrefab, BulletStartPosition.transform.position, transform.rotation); //создать 
+        if (_timeAfterLastShot >= _fireRate) {
+            GameObject NewArrow = Instantiate(_bulletPrefab, _bulletStartPosition.transform.position, transform.rotation); //создать 
             Arrow arrow = NewArrow.GetComponent<Arrow>();
             arrow.Target = closedEnemy;
-            arrow._speed = bulletSpeed;
+            arrow._speed = _bulletSpeed;
             arrow.Damage = _damage;
            
-            timeAfterLastShot = 0;
+            _timeAfterLastShot = 0;
         }
     }
 }

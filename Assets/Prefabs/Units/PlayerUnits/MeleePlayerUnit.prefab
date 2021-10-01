@@ -109,11 +109,10 @@ MonoBehaviour:
   _healthMax: 50
   _currentHealth: 0
   _damage: 2
-  _animator: {fileID: 0}
-  isUnitAtack: 0
-  isUnitDefend: 0
-  statusSelectionMenu: {fileID: 4398403818420525923}
-  defendPoint: {fileID: 0}
+  _isUnitAtack: 0
+  _isUnitDefend: 0
+  _statusSelectionMenu: {fileID: 4398403818420525923}
+  _defendPoint: {fileID: 0}
   minimalDistance: 2
   radius: 0
 --- !u!114 &3744180325558021206
@@ -128,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ec247ad6ee1d14ea297024550cdc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {x: 1, y: 1}
-  statePosition: 0
+  _gridBuildingSize: {x: 1, y: 1}
+  _statePosition: 0
 --- !u!1 &4638049882681615885
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a9437b0860e9c46858769d214e9caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Warrior: {fileID: 4555242388374885748}
+  _warrior: {fileID: 4555242388374885748}
 --- !u!54 &184427463845259404
 Rigidbody:
   m_ObjectHideFlags: 0

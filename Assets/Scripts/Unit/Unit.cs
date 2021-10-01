@@ -10,14 +10,14 @@ public abstract class Unit : MonoBehaviour
 
     public int _damage;
 
-    protected Animator animator;
+    protected Animator _animator;
 
     public abstract void Death();
 
     private void Awake()
     {
         _currentHealth = _healthMax;
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     public void ApplyDamage(int damage)

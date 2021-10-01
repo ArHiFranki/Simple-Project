@@ -273,18 +273,16 @@ MonoBehaviour:
   _healthMax: 0
   _currentHealth: 0
   _damage: 0
-  _deahtAnimationDuration: 0
-  _animator: {fileID: 0}
-  isUnitAtack: 0
-  isUnitDefend: 0
-  statusSelectionMenu: {fileID: 4702141537437396107}
-  defendPoint: {fileID: 0}
-  minimalDistance: 10
-  radius: 11
-  BulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
-  BulletStartPosition: {fileID: 2904359424954249292}
-  bulletSpeed: 10
-  fireRate: 1
+  _isUnitAtack: 0
+  _isUnitDefend: 0
+  _statusSelectionMenu: {fileID: 4702141537437396107}
+  _defendPoint: {fileID: 0}
+  _distanceMin: 7
+  _radius: 10
+  _fireRate: 1
+  _bulletSpeed: 7
+  _bulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
+  _bulletStartPosition: {fileID: 2904359424954249292}
 --- !u!114 &757390202873875546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,8 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ec247ad6ee1d14ea297024550cdc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {x: 1, y: 1}
-  statePosition: 0
+  _gridBuildingSize: {x: 1, y: 1}
+  _statePosition: 0
 --- !u!1 &7393076858591129586
 GameObject:
   m_ObjectHideFlags: 0

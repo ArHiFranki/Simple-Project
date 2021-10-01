@@ -5,41 +5,40 @@ using UnityEngine;
 //Скрипт здания
 public class Building : MonoBehaviour
 {
-    public Vector2Int Size = Vector2Int.one;//Размер здания на сетке
+    [Header("Размер здания на сетке")] public Vector2Int _gridBuildingSize = Vector2Int.one;
+    [HideInInspector]public int _statePosition = 0;
 
-    [HideInInspector]public int statePosition = 0;
+    private Color _gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
 
-    Color gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
-
-
-    public void SetTransperent(bool available)//Задать цвет активному зданию
+    //Задать цвет активному зданию
+    public void SetTransperent(bool available)
     {
-        if (available)//если объект можно поставить
+        //если объект можно поставить
+        if (available)
         {
-            gizmosColor = Color.green;
+            _gizmosColor = Color.green;
         }
         else 
         {
-            gizmosColor = Color.red;
+            _gizmosColor = Color.red;
         }
     }
 
-    public void SetNormalColor()//Вернуть нормальный цвет
+    //Вернуть нормальный цвет
+    public void SetNormalColor()
     {
-
-        gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
-
+        _gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
     }
 
-
-    private void OnDrawGizmos()//Отрисовка сетки объекта в сцене (Вспомогательно)
+    //Отрисовка сетки объекта в сцене (Вспомогательно)
+    private void OnDrawGizmos()
     {
-        for (int x = 0; x < Size.x; x++)
+        for (int x = 0; x < _gridBuildingSize.x; x++)
         {
-            for (int y = 0; y < Size.y; y++)
+            for (int y = 0; y < _gridBuildingSize.y; y++)
             {
-                Gizmos.color = gizmosColor;
-                if (statePosition == 0 || statePosition == 1)
+                Gizmos.color = _gizmosColor;
+                if (_statePosition == 0 || _statePosition == 1)
                 {
                     Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1, 0.1f, 1));
                 }
@@ -51,19 +50,25 @@ public class Building : MonoBehaviour
         }
     }
 
-    public void RotateBilding()//Вращение обьекта
+    //Вращение обьекта
+    public void RotateBilding()
     {
-        float degrees = 90;//Угол поворота
-        transform.Rotate(0,degrees,0);//поворот меша
+        float rotationAngle = 90;
+        //поворот объекта
+        transform.Rotate(0,rotationAngle,0);
 
-        if (statePosition < 3)
-            statePosition++;
+        if (_statePosition < 3)
+        {
+            _statePosition++;
+        }
         else
-            statePosition = 0;
+        {
+            _statePosition = 0;
+        }
 
         //поворот сетки
-        int NevX = Size.y;
-        int NevY = Size.x;
-        Size = new Vector2Int(NevX, NevY);
+        int _newX = _gridBuildingSize.y;
+        int _newY = _gridBuildingSize.x;
+        _gridBuildingSize = new Vector2Int(_newX, _newY);
     }
 }

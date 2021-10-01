@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class PlayerUnit : Unit
 {
-    public bool isUnitAtack;
-    public bool isUnitDefend;
+    public bool _isUnitAtack;
+    public bool _isUnitDefend;
 
     [Header("Меню выбора состояния")]
-    public GameObject statusSelectionMenu;
+    public GameObject _statusSelectionMenu;
 
-    [Header("Точка которую нужно защищать")]
-    public Transform defendPoint;
+    [HideInInspector]public Transform _defendPoint;
 
     public override void Death()
     {
@@ -21,15 +20,15 @@ public class PlayerUnit : Unit
 
     public void IsUnitAtack()
     {
-        isUnitAtack = true;
-        isUnitDefend = false;
-        statusSelectionMenu.SetActive(false);
+        _isUnitAtack = true;
+        _isUnitDefend = false;
+        _statusSelectionMenu.SetActive(false);
     }
 
     public void IsUnitDefend()
     {
-        isUnitAtack = false;
-        isUnitDefend = true;
-        statusSelectionMenu.SetActive(false);
+        _isUnitAtack = false;
+        _isUnitDefend = true;
+        _statusSelectionMenu.SetActive(false);
     }
 }

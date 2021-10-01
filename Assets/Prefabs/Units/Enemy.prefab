@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a9437b0860e9c46858769d214e9caf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Warrior: {fileID: 2508252201955448862}
+  _warrior: {fileID: 2508252201955448862}
 --- !u!54 &1702815276869540022
 Rigidbody:
   m_ObjectHideFlags: 0
