@@ -17,5 +17,11 @@ public class Weapon : MonoBehaviour
         {
             playerUnit.ApplyDamage(_warrior.GetComponent<Enemy>().damage);
         }
+
+        if (_warrior.GetComponent<Enemy>() && other.gameObject.TryGetComponent(out Base baseObject))
+        {
+            GameController tmpController = baseObject.GetComponent<Base>().gameController;
+            tmpController.ApplyDamage(_warrior.GetComponent<Enemy>().damage);
+        }
     }
 }
