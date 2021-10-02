@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 
     public event UnityAction GameOver;
     public event UnityAction<int> GoldChanged;
+    public event UnityAction<int, int> BaseHitPointsChanged;
 
     private void OnEnable()
     {
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _curruntBaseHitPoints -= damage;
+        BaseHitPointsChanged?.Invoke(_curruntBaseHitPoints, _baseHitPointsMax);
 
         if (_curruntBaseHitPoints <= 0)
         {
@@ -70,6 +72,7 @@ public class GameController : MonoBehaviour
                 _curruntBaseHitPoints = _baseHitPointsMax;
             }
         }
+        BaseHitPointsChanged?.Invoke(_curruntBaseHitPoints, _baseHitPointsMax);
     }
 
     public void ChangeGold(int goldValue)
