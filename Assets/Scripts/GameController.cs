@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private int _gold;
 
     private int _curruntBaseHitPoints;
+    private int _totalEnemyCount;
+    private int _deadEnemyCount;
 
     public bool IsGamePause => _isGamePause;
     public bool IsGameOver => _isGameOver;
@@ -23,6 +25,7 @@ public class GameController : MonoBehaviour
     public int Gold => _gold;
 
     public event UnityAction GameOver;
+    public event UnityAction GameWin;
     public event UnityAction<int> GoldChanged;
     public event UnityAction<int, int> BaseHitPointsChanged;
 
@@ -42,6 +45,7 @@ public class GameController : MonoBehaviour
         _isPreparationPhase = true;
         _isFightPhase = false;
         _curruntBaseHitPoints = _baseHitPointsMax;
+        _deadEnemyCount = 0;
     }
 
     public void SetGamePauseCondition(bool condition)
@@ -91,5 +95,20 @@ public class GameController : MonoBehaviour
     {
         _isPreparationPhase = false;
         _isFightPhase = true;
+    }
+
+    public void SetTotalEnemyCount(int count)
+    {
+        _totalEnemyCount = count;
+    }
+
+    public void IncrementDeadEnemyCount()
+    {
+        _deadEnemyCount++;
+
+        if(_deadEnemyCount == _totalEnemyCount && !_isGameOver)
+        {
+            GameWin?.Invoke();
+        }
     }
 }

@@ -28,6 +28,8 @@ public class Enemy : Unit
     public override void Death()
     {
         gameController.ChangeGold(_reward);
+        gameObject.SetActive(false);
+        gameController.IncrementDeadEnemyCount();
         Destroy(gameObject);
     }
 
