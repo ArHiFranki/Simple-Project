@@ -127,9 +127,9 @@ public class Range : PlayerUnit
         if (_timeAfterLastShot >= _fireRate) {
             GameObject newArrow = Instantiate(bulletPrefab, bulletStartPosition.transform.position, transform.rotation);
             Arrow arrow = newArrow.GetComponent<Arrow>();
-            arrow.Target = closedEnemy;
-            arrow._speed = _bulletSpeed;
-            arrow.Damage = damage;
+            arrow.targetOfArrow = closedEnemy;
+            arrow.arrowSpeed = _bulletSpeed;
+            arrow.damage = damage;
             _timeAfterLastShot = 0;
         }
     }

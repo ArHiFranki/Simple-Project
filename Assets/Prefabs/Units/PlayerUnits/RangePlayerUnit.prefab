@@ -210,7 +210,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4062119808225065114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -223,7 +223,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 13
   m_ObstacleAvoidanceType: 4
 --- !u!95 &7774211502167143430
 Animator:
@@ -279,12 +279,12 @@ MonoBehaviour:
   _statusSelectionMenu: {fileID: 4702141537437396107}
   _defendPoint: {fileID: 0}
   unitPrice: 20
+  bulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
+  bulletStartPosition: {fileID: 2904359424954249292}
   _distanceMin: 7
   _radius: 10
   _fireRate: 1
   _bulletSpeed: 7
-  bulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
-  bulletStartPosition: {fileID: 2904359424954249292}
 --- !u!114 &757390202873875546
 MonoBehaviour:
   m_ObjectHideFlags: 0

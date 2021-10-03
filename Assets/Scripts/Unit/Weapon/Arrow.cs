@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public Transform Target;
-    public float _speed;
-    public int Damage;
+    public Transform targetOfArrow;
+    public float arrowSpeed;
+    public int damage;
     private void Update()
     {
-        if (Target != null)
-        {
-            
-            Vector3 target = new Vector3(Target.position.x, Target.position.y + 1, Target.position.z);
+        PursuitOfTarget();
+    }
 
-            transform.position = Vector3.MoveTowards(transform.position, target, _speed * Time.deltaTime);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Enemy enemy))
+        {
+            enemy.ApplyDamage(damage);
+            Destroy(gameObject);
+        }
+    }
+
+    private void PursuitOfTarget()
+    {
+        if (targetOfArrow != null)
+        {
+            Vector3 target = new Vector3(targetOfArrow.position.x, targetOfArrow.position.y + 1, targetOfArrow.position.z);
+
+            transform.position = Vector3.MoveTowards(transform.position, target, arrowSpeed * Time.deltaTime);
             transform.LookAt(target);
         }
         else
@@ -22,18 +35,4 @@ public class Arrow : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnTriggerEnter(Collider other) //если объект сталкивается с чем-то
-    {
-        Debug.Log("Bulet hit " + other.gameObject.name); //вывести в консоль имя обьекта с которм было столкновение
-
-        if (other.gameObject.TryGetComponent(out Enemy enemy))
-        {
-            enemy.ApplyDamage(Damage);
-        }
-
-        Destroy(gameObject);
-    }
-
-   
 }
