@@ -258,6 +258,7 @@ public class BildingsGrid : MonoBehaviour
             _flyingBilding = Instantiate(_targetPoint);
             playerUnit._defendPoint = _flyingBilding.transform;
             _unitflyingBilding = null;
+            //_gameController.StartStyleSelectedEvent();
         }
     }
 
