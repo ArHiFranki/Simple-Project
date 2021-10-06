@@ -91,6 +91,7 @@ public class BildingsGrid : MonoBehaviour
         }
 
         _flyingBilding = Instantiate(bildingPrefab);
+
         if (_flyingBilding.TryGetComponent(out PlayerUnit playerUnit))
         {
             playerUnit.InitUnit(_gameController);
@@ -164,6 +165,8 @@ public class BildingsGrid : MonoBehaviour
 
                 // Смена цвета сетки активного здания
                 _flyingBilding.SetTransperent(available);
+
+
 
                 if (available && Input.GetMouseButtonDown(0))
                 {
@@ -239,6 +242,7 @@ public class BildingsGrid : MonoBehaviour
 
         if (_flyingBilding.GetComponent<Building>().isTargetPoint == true) {
             _gameController.StartStyleSelectedEvent();
+            _flyingBilding.GetComponentInChildren<Transform>().gameObject.SetActive(false);
         }
         _flyingBilding = null;
         CellParentSetActive(false);       
@@ -261,7 +265,6 @@ public class BildingsGrid : MonoBehaviour
             _flyingBilding = Instantiate(_targetPoint);
             playerUnit._defendPoint = _flyingBilding.transform;
             _unitflyingBilding = null;
-            //_gameController.StartStyleSelectedEvent();
         }
     }
 
