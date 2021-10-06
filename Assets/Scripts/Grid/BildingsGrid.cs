@@ -94,6 +94,7 @@ public class BildingsGrid : MonoBehaviour
         if (_flyingBilding.TryGetComponent(out PlayerUnit playerUnit))
         {
             playerUnit.InitUnit(_gameController);
+            _gameController.StartNewUnitBuildEvent();
         }
 
     }
@@ -245,11 +246,11 @@ public class BildingsGrid : MonoBehaviour
     {
         PlayerUnit playerUnit = _unitflyingBilding.GetComponent<PlayerUnit>();
 
-        if (playerUnit._isUnitAtack)
+        if (playerUnit.isUnitAtack)
         {
             _unitflyingBilding = null;
         }
-        else if (playerUnit._isUnitDefend)
+        else if (playerUnit.isUnitDefend)
         {
             CellParentSetActive(true);
 

@@ -24,8 +24,8 @@ public class Melee : PlayerUnit
 
         if (gameController.IsPreparationPhase != true)
         {
-            if (_isUnitAtack) AtackStyle();
-            if (_isUnitDefend) DefenseStyle();
+            if (isUnitAtack) AtackStyle();
+            if (isUnitDefend) DefenseStyle();
         }
     }
 

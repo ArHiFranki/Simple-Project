@@ -40,8 +40,8 @@ public class Range : PlayerUnit
         _timeAfterLastShot += Time.deltaTime;
 
         if (!gameController.IsPreparationPhase) {
-            if (_isUnitAtack) AtackStyle();
-            if (_isUnitDefend && _defendPoint != null) DefenseStyle();
+            if (isUnitAtack) AtackStyle();
+            if (isUnitDefend && _defendPoint != null) DefenseStyle();
         }
     }
 

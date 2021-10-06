@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour
 
     public event UnityAction GameOver;
     public event UnityAction GameWin;
+    public event UnityAction NewUnitBuild;
+    public event UnityAction StyleSelected;
     public event UnityAction<int> GoldChanged;
     public event UnityAction<int, int> BaseHitPointsChanged;
 
@@ -110,5 +112,15 @@ public class GameController : MonoBehaviour
         {
             GameWin?.Invoke();
         }
+    }
+
+    public void StartNewUnitBuildEvent()
+    {
+        NewUnitBuild?.Invoke();
+    }
+
+    public void StartStyleSelectedEvent()
+    {
+        StyleSelected?.Invoke();
     }
 }

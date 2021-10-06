@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerUnit : Unit
 {
-    public bool _isUnitAtack;
-    public bool _isUnitDefend;
+    public bool isUnitAtack;
+    public bool isUnitDefend;
 
     [Header("Меню выбора состояния")]
     public GameObject _statusSelectionMenu;
@@ -14,6 +13,7 @@ public class PlayerUnit : Unit
     [HideInInspector] public Transform _defendPoint;
 
     public int unitPrice;
+
     public override void Death()
     {
         Destroy(gameObject);
@@ -21,15 +21,17 @@ public class PlayerUnit : Unit
 
     public void IsUnitAtack()
     {
-        _isUnitAtack = true;
-        _isUnitDefend = false;
+        isUnitAtack = true;
+        isUnitDefend = false;
         _statusSelectionMenu.SetActive(false);
+        gameController.StartStyleSelectedEvent();
     }
 
     public void IsUnitDefend()
     {
-        _isUnitAtack = false;
-        _isUnitDefend = true;
+        isUnitAtack = false;
+        isUnitDefend = true;
         _statusSelectionMenu.SetActive(false);
+        gameController.StartStyleSelectedEvent();
     }
 }
