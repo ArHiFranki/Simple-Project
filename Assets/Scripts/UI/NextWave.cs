@@ -26,11 +26,6 @@ public class NextWave : MonoBehaviour
         _nextWaveButton.onClick.RemoveListener(OnNextWaveButtonClick);
     }
 
-    private void Start()
-    {
-        //OnStyleSelected();
-    }
-
     public void OnAllEnemySpawned()
     {
         _nextWaveButton.gameObject.SetActive(true);
