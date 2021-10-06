@@ -893,6 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitButton: {fileID: 900343774}
+  _disablePanel: {fileID: 762490073}
   _playerUnit: {fileID: 8353190709393143839, guid: 0996dda6107bd794bb88d5f26267d585, type: 3}
   _gameController: {fileID: 284352319}
 --- !u!1 &265196327
@@ -8399,6 +8400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unitButton: {fileID: 265196329}
+  _disablePanel: {fileID: 353350962}
   _playerUnit: {fileID: 1263457470, guid: 62e12f5ac0e17ff458d9f1b927668ba0, type: 3}
   _gameController: {fileID: 284352319}
 --- !u!1 &1658640897
