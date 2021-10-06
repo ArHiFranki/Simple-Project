@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ec247ad6ee1d14ea297024550cdc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainRenderer: {fileID: 0}
-  Size: {x: 1, y: 1}
-  statePosition: 0
+  gridBuildingSize: {x: 1, y: 1}
+  _statePosition: 0
+  isTargetPoint: 1

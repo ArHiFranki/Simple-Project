@@ -237,6 +237,9 @@ public class BildingsGrid : MonoBehaviour
             _gameController.ChangeGold(-playerUnit.unitPrice);
         }
 
+        if (_flyingBilding.GetComponent<Building>().isTargetPoint == true) {
+            _gameController.StartStyleSelectedEvent();
+        }
         _flyingBilding = null;
         CellParentSetActive(false);       
     }

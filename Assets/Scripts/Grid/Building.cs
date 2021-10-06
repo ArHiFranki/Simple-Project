@@ -12,6 +12,8 @@ public class Building : MonoBehaviour
 
     private Color _gizmosColor = new Color(0.88f, 0.5f, 0f, 0.3f);
 
+    public bool isTargetPoint = false;
+
     // Задать цвет активному зданию
     public void SetTransperent(bool isAvailable)
     {
