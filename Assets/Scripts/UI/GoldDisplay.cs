@@ -19,7 +19,7 @@ public class GoldDisplay : MonoBehaviour
         _gameController.GoldChanged -= OnGoldChanged;
     }
 
-    private void OnGoldChanged(int money)
+    private void OnGoldChanged()
     {
         _goldCount.text = "Gold: " + _gameController.Gold.ToString();
     }

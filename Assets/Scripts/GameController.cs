@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
     public event UnityAction GameWin;
     public event UnityAction NewUnitBuild;
     public event UnityAction StyleSelected;
-    public event UnityAction<int> GoldChanged;
+    public event UnityAction GoldChanged;
     public event UnityAction<int, int> BaseHitPointsChanged;
 
     private void OnEnable()
@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour
     public void ChangeGold(int goldValue)
     {
         _gold += goldValue;
-        GoldChanged?.Invoke(_gold);
+        GoldChanged?.Invoke();
     }
 
     public void SetPreparationPhase()

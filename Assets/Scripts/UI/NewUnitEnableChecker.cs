@@ -14,7 +14,7 @@ public class NewUnitEnableChecker : MonoBehaviour
 
     private void Start()
     {
-        OnGoldChange(0);
+        OnGoldChange();
     }
 
     private void OnEnable()
@@ -31,7 +31,7 @@ public class NewUnitEnableChecker : MonoBehaviour
         _gameController.StyleSelected -= OnStyleSelected;
     }
 
-    private void OnGoldChange(int gold)
+    private void OnGoldChange()
     {
         if (_gameController.Gold >= _playerUnit.unitPrice)
         {
