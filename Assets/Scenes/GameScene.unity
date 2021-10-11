@@ -1277,6 +1277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b711eb6b81f3cc478437f5f019819e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _musicVolume: 0
+  _effectsVolume: 0
 --- !u!4 &336561291
 Transform:
   m_ObjectHideFlags: 0
@@ -4250,7 +4252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83b279852b4eb14a882b0cbbb9594e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settingsController: {fileID: 0}
+  _gameController: {fileID: 284352319}
+  _menuMusic: {fileID: 0}
+  _preparationPhaseMusic: {fileID: 0}
+  _fightPhaseMusic: {fileID: 0}
 --- !u!1 &1057808387
 GameObject:
   m_ObjectHideFlags: 0

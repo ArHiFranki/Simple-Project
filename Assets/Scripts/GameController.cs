@@ -29,6 +29,8 @@ public class GameController : MonoBehaviour
     public event UnityAction NewUnitBuild;
     public event UnityAction StyleSelected;
     public event UnityAction GoldChanged;
+    public event UnityAction StartPreparationPhase;
+    public event UnityAction StartFightPhase;
     public event UnityAction<int, int> BaseHitPointsChanged;
 
     private void OnEnable()
@@ -48,6 +50,7 @@ public class GameController : MonoBehaviour
         _isFightPhase = false;
         _curruntBaseHitPoints = _baseHitPointsMax;
         _deadEnemyCount = 0;
+        StartPreparationPhase?.Invoke();
     }
 
     public void SetGamePauseCondition(bool condition)
@@ -91,12 +94,14 @@ public class GameController : MonoBehaviour
     {
         _isPreparationPhase = true;
         _isFightPhase = false;
+        StartPreparationPhase?.Invoke();
     }
 
     public void SetFightPhase()
     {
         _isPreparationPhase = false;
         _isFightPhase = true;
+        StartFightPhase?.Invoke();
     }
 
     public void SetTotalEnemyCount(int count)

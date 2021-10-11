@@ -6,14 +6,28 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(AudioSource))]
 public class MusicController : MonoBehaviour
 {
-    [SerializeField] private AudioClip _menuThemeSound;
-    [SerializeField] private AudioClip _gameThemeSound;
-    [SerializeField] private SettingsController _settingsController;
+    [SerializeField] private GameController _gameController;
+    [SerializeField] private AudioClip _menuMusic;
+    [SerializeField] private AudioClip _preparationPhaseMusic;
+    [SerializeField] private AudioClip _fightPhaseMusic;
 
+    private SettingsController _settingsController;
     private AudioSource _backgroundMusic;
     private const string _menuScene = "MenuScene";
     private const string _gameScene = "GameScene";
     private const string _settingsControllerName = "SettingsController";
+
+    private void OnEnable()
+    {
+        _gameController.StartPreparationPhase += OnPreparationPhase;
+        _gameController.StartFightPhase += OnFightPhase;
+    }
+
+    private void OnDisable()
+    {
+        _gameController.StartPreparationPhase -= OnPreparationPhase;
+        _gameController.StartFightPhase -= OnFightPhase;
+    }
 
     private void Awake()
     {
@@ -23,11 +37,7 @@ public class MusicController : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == _menuScene)
         {
-            PlayBackgroundMusic(_menuThemeSound, _settingsController.MusicVolume);
-        }
-        else if (SceneManager.GetActiveScene().name == _gameScene)
-        {
-            PlayBackgroundMusic(_gameThemeSound, _settingsController.MusicVolume);
+            PlayBackgroundMusic(_menuMusic, _settingsController.MusicVolume);
         }
     }
 
@@ -37,5 +47,15 @@ public class MusicController : MonoBehaviour
         _backgroundMusic.clip = musicTheme;
         _backgroundMusic.volume = volume;
         _backgroundMusic.Play();
+    }
+
+    private void OnPreparationPhase()
+    {
+        PlayBackgroundMusic(_preparationPhaseMusic, _settingsController.MusicVolume);
+    }
+
+    private void OnFightPhase()
+    {
+        PlayBackgroundMusic(_fightPhaseMusic, _settingsController.MusicVolume);
     }
 }
