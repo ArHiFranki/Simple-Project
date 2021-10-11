@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Menu _menu;
+    [SerializeField] private MusicController _musicController;
+    [SerializeField] private SoundFXController _soundFXController;
     [SerializeField] private bool _isGamePause;
     [SerializeField] private bool _isGameOver;
     [SerializeField] private bool _isPreparationPhase;
@@ -67,6 +69,8 @@ public class GameController : MonoBehaviour
         {
             _isGameOver = true;
             GameOver?.Invoke();
+            _musicController.StopBackgroundMusic();
+            _soundFXController.PlayGameOverSound();
         }
     }
 
@@ -116,6 +120,8 @@ public class GameController : MonoBehaviour
         if(_deadEnemyCount == _totalEnemyCount && !_isGameOver)
         {
             GameWin?.Invoke();
+            _musicController.StopBackgroundMusic();
+            _soundFXController.PlayVictorySound();
         }
     }
 
