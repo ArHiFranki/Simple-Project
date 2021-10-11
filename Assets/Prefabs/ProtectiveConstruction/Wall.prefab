@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 475a642b8e81399458cb316eac45a3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priceOfProtectiveConstruction: 10
+  costProtectiveConstruction: 10
 --- !u!65 &1241277266482582210
 BoxCollider:
   m_ObjectHideFlags: 0
