@@ -2,17 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SoundFXController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioClip _gameOverSound;
+    [SerializeField] private AudioClip _onMouseClickUISound;
+    [SerializeField] private AudioClip _onMouseOverUISound;
+
+    private SettingsController _settingsController;
+    private AudioSource _soundFX;
+
+    private const string _settingsControllerName = "SettingsController";
+
+    private void Awake()
     {
-        
+        _soundFX = GetComponent<AudioSource>();
+        _settingsController = GameObject.Find(_settingsControllerName).GetComponent<SettingsController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayGameOverSound()
     {
-        
+        _soundFX.PlayOneShot(_gameOverSound, _settingsController.EffectsVolume);
+    }
+
+    public void PlayOnMouseClickUISound()
+    {
+        _soundFX.PlayOneShot(_onMouseClickUISound, _settingsController.EffectsVolume);
+    }
+
+    public void PlayOnMouseOverUISound()
+    {
+        _soundFX.PlayOneShot(_onMouseOverUISound, _settingsController.EffectsVolume);
     }
 }

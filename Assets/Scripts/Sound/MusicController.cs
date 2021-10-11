@@ -55,6 +55,16 @@ public class MusicController : MonoBehaviour
         _backgroundMusic.Play();
     }
 
+    public void PlayBackgroundMusic()
+    {
+        _backgroundMusic.Play();
+    }
+
+    public void StopBackgroundMusic()
+    {
+        _backgroundMusic.Stop();
+    }
+
     private void OnPreparationPhase()
     {
         PlayBackgroundMusic(_preparationPhaseMusic, _settingsController.MusicVolume);
