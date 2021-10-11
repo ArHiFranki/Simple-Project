@@ -240,6 +240,11 @@ public class BildingsGrid : MonoBehaviour
             _gameController.ChangeGold(-playerUnit.unitPrice);
         }
 
+        if (_flyingBilding.TryGetComponent(out ProtectiveConstruction protectiveConstruction))
+        {
+            _gameController.ChangeGold(-protectiveConstruction.costProtectiveConstruction);
+        }
+
         if (_flyingBilding.GetComponent<Building>().isTargetPoint == true) {
             _gameController.StartStyleSelectedEvent();
             _flyingBilding.GetComponentInChildren<Transform>().gameObject.SetActive(false);

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1241277266482582208}
   - component: {fileID: 1241277266482582211}
+  - component: {fileID: 5328283528554364387}
   - component: {fileID: 1241277266482582210}
   - component: {fileID: 1241277266482582221}
-  - component: {fileID: 2776696037108684348}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -50,6 +50,19 @@ MonoBehaviour:
   gridBuildingSize: {x: 1, y: 1}
   _statePosition: 0
   isTargetPoint: 0
+--- !u!114 &5328283528554364387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241277266482582220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475a642b8e81399458cb316eac45a3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priceOfProtectiveConstruction: 10
 --- !u!65 &1241277266482582210
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79,19 +92,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.4, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &2776696037108684348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241277266482582220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475a642b8e81399458cb316eac45a3b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  costProtectiveConstruction: 10
 --- !u!1 &1241277266710643458
 GameObject:
   m_ObjectHideFlags: 0
