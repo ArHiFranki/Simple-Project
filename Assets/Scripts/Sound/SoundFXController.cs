@@ -8,6 +8,7 @@ public class SoundFXController : MonoBehaviour
     [SerializeField] private AudioClip _gameOverSound;
     [SerializeField] private AudioClip _onMouseClickUISound;
     [SerializeField] private AudioClip _onMouseOverUISound;
+    [SerializeField] private AudioClip _levelUpSound;
 
     private SettingsController _settingsController;
     private AudioSource _soundFX;
@@ -33,5 +34,10 @@ public class SoundFXController : MonoBehaviour
     public void PlayOnMouseOverUISound()
     {
         _soundFX.PlayOneShot(_onMouseOverUISound, _settingsController.EffectsVolume);
+    }
+
+    public void PlayLevelUpSound()
+    {
+        _soundFX.PlayOneShot(_levelUpSound, _settingsController.EffectsVolume);
     }
 }

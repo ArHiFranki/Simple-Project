@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b711eb6b81f3cc478437f5f019819e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicVolume: 0
-  _effectsVolume: 0
+  _musicVolume: 0.5
+  _effectsVolume: 0.5
 --- !u!4 &74168294
 Transform:
   m_ObjectHideFlags: 0
@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b8d6d8dc61fc64a9b0c3c8cd0d593b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameOverSound: {fileID: 0}
+  _onMouseClickUISound: {fileID: 0}
+  _onMouseOverUISound: {fileID: 0}
 --- !u!4 &544951086
 Transform:
   m_ObjectHideFlags: 0
