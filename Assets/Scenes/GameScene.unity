@@ -829,6 +829,7 @@ GameObject:
   - component: {fileID: 213885590}
   - component: {fileID: 213885589}
   - component: {fileID: 213885588}
+  - component: {fileID: 213885591}
   m_Layer: 5
   m_Name: Wall
   m_TagString: Untagged
@@ -974,6 +975,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213885586}
   m_CullTransparentMesh: 1
+--- !u!114 &213885591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213885586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99d7cf851eb37643a30a312f6fad255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundFXController: {fileID: 1274598726}
 --- !u!1 &240905872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,8 +1079,9 @@ GameObject:
   - component: {fileID: 265196331}
   - component: {fileID: 265196330}
   - component: {fileID: 265196329}
+  - component: {fileID: 265196332}
   m_Layer: 5
-  m_Name: Melee
+  m_Name: Melee Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1198,6 +1213,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265196327}
   m_CullTransparentMesh: 1
+--- !u!114 &265196332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265196327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99d7cf851eb37643a30a312f6fad255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundFXController: {fileID: 1274598726}
 --- !u!1 &284352317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2209,7 @@ GameObject:
   - component: {fileID: 631286837}
   - component: {fileID: 631286836}
   - component: {fileID: 631286835}
+  - component: {fileID: 631286838}
   m_Layer: 5
   m_Name: Menu Button
   m_TagString: Untagged
@@ -2302,6 +2331,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631286833}
   m_CullTransparentMesh: 1
+--- !u!114 &631286838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631286833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99d7cf851eb37643a30a312f6fad255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundFXController: {fileID: 1274598726}
 --- !u!1 &651102938
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,6 +3153,7 @@ GameObject:
   - component: {fileID: 837459203}
   - component: {fileID: 837459202}
   - component: {fileID: 837459201}
+  - component: {fileID: 837459204}
   m_Layer: 5
   m_Name: Next Wave Button
   m_TagString: Untagged
@@ -3220,6 +3263,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837459199}
   m_CullTransparentMesh: 1
+--- !u!114 &837459204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837459199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99d7cf851eb37643a30a312f6fad255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundFXController: {fileID: 1274598726}
 --- !u!1001 &853865454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3440,8 +3496,9 @@ GameObject:
   - component: {fileID: 900343776}
   - component: {fileID: 900343775}
   - component: {fileID: 900343774}
+  - component: {fileID: 900343777}
   m_Layer: 5
-  m_Name: Range
+  m_Name: Range Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3573,6 +3630,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900343772}
   m_CullTransparentMesh: 1
+--- !u!114 &900343777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900343772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99d7cf851eb37643a30a312f6fad255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundFXController: {fileID: 1274598726}
 --- !u!1 &927075448
 GameObject:
   m_ObjectHideFlags: 0
