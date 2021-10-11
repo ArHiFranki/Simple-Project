@@ -19,14 +19,20 @@ public class MusicController : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameController.StartPreparationPhase += OnPreparationPhase;
-        _gameController.StartFightPhase += OnFightPhase;
+        if (SceneManager.GetActiveScene().name == _gameScene)
+        {
+            _gameController.StartPreparationPhase += OnPreparationPhase;
+            _gameController.StartFightPhase += OnFightPhase;
+        }
     }
 
     private void OnDisable()
     {
-        _gameController.StartPreparationPhase -= OnPreparationPhase;
-        _gameController.StartFightPhase -= OnFightPhase;
+        if (SceneManager.GetActiveScene().name == _gameScene)
+        {
+            _gameController.StartPreparationPhase -= OnPreparationPhase;
+            _gameController.StartFightPhase -= OnFightPhase;
+        }
     }
 
     private void Awake()
