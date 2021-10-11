@@ -5131,10 +5131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b8d6d8dc61fc64a9b0c3c8cd0d593b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameOverSound: {fileID: 0}
-  _onMouseClickUISound: {fileID: 0}
-  _onMouseOverUISound: {fileID: 0}
-  _levelUpSound: {fileID: 0}
+  _gameOverSound: {fileID: 8300000, guid: 056d599805949054baf40f5d0cb0a713, type: 3}
+  _victorySound: {fileID: 8300000, guid: 08e1c459aad5c3045a58e54d8c9bc0dc, type: 3}
+  _onMouseClickUISound: {fileID: 8300000, guid: e408a0f3a186aac449a683ca6d61f2b4, type: 3}
+  _onMouseOverUISound: {fileID: 8300000, guid: be3e603e7f49ca04b8e6625403779af2, type: 3}
+  _levelUpSound: {fileID: 8300000, guid: 568704b7f29a131459d37bfa2e17db04, type: 3}
+  _progressionSound: {fileID: 8300000, guid: 142ddb369664f1443aa65070fa0780dc, type: 3}
+  _transitionSound: {fileID: 8300000, guid: 619e0a8c73408344aa11b32d242a15b0, type: 3}
+  _unitDeleteSound: {fileID: 8300000, guid: b4e4f6680dba1a24ea29e39c789bce1c, type: 3}
 --- !u!1 &1306213931
 GameObject:
   m_ObjectHideFlags: 0

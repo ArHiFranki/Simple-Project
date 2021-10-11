@@ -6,9 +6,13 @@ using UnityEngine;
 public class SoundFXController : MonoBehaviour
 {
     [SerializeField] private AudioClip _gameOverSound;
+    [SerializeField] private AudioClip _victorySound;
     [SerializeField] private AudioClip _onMouseClickUISound;
     [SerializeField] private AudioClip _onMouseOverUISound;
     [SerializeField] private AudioClip _levelUpSound;
+    [SerializeField] private AudioClip _progressionSound;
+    [SerializeField] private AudioClip _transitionSound;
+    [SerializeField] private AudioClip _unitDeleteSound;
 
     private SettingsController _settingsController;
     private AudioSource _soundFX;
@@ -26,6 +30,11 @@ public class SoundFXController : MonoBehaviour
         _soundFX.PlayOneShot(_gameOverSound, _settingsController.EffectsVolume);
     }
 
+    public void PlayVictorySound()
+    {
+        _soundFX.PlayOneShot(_victorySound, _settingsController.EffectsVolume);
+    }
+
     public void PlayOnMouseClickUISound()
     {
         _soundFX.PlayOneShot(_onMouseClickUISound, _settingsController.EffectsVolume);
@@ -39,5 +48,20 @@ public class SoundFXController : MonoBehaviour
     public void PlayLevelUpSound()
     {
         _soundFX.PlayOneShot(_levelUpSound, _settingsController.EffectsVolume);
+    }
+
+    public void PlayProgressionSound()
+    {
+        _soundFX.PlayOneShot(_progressionSound, _settingsController.EffectsVolume);
+    }
+
+    public void PlayTransitionSound()
+    {
+        _soundFX.PlayOneShot(_transitionSound, _settingsController.EffectsVolume);
+    }
+
+    public void PlayUnitDeleteSound()
+    {
+        _soundFX.PlayOneShot(_unitDeleteSound, _settingsController.EffectsVolume);
     }
 }
