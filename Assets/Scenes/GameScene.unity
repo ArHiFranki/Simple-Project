@@ -4253,7 +4253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameController: {fileID: 284352319}
-  _menuMusic: {fileID: 0}
+  _menuMusic: {fileID: 8300000, guid: 30bb310a981e0ad45b63188983256b69, type: 3}
   _preparationPhaseMusic: {fileID: 8300000, guid: dcc6cefe16efb1d459b6e1f7c3138384, type: 3}
   _fightPhaseMusic: {fileID: 8300000, guid: 7acb1ab400cf2ce48a8583f67a306cb7, type: 3}
 --- !u!1 &1057808387
@@ -5134,6 +5134,7 @@ MonoBehaviour:
   _gameOverSound: {fileID: 0}
   _onMouseClickUISound: {fileID: 0}
   _onMouseOverUISound: {fileID: 0}
+  _levelUpSound: {fileID: 0}
 --- !u!1 &1306213931
 GameObject:
   m_ObjectHideFlags: 0

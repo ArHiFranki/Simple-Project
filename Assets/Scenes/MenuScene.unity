@@ -297,6 +297,7 @@ MonoBehaviour:
   _gameOverSound: {fileID: 0}
   _onMouseClickUISound: {fileID: 0}
   _onMouseOverUISound: {fileID: 0}
+  _levelUpSound: {fileID: 0}
 --- !u!4 &544951086
 Transform:
   m_ObjectHideFlags: 0
@@ -614,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameController: {fileID: 0}
-  _menuMusic: {fileID: 0}
+  _menuMusic: {fileID: 8300000, guid: 30bb310a981e0ad45b63188983256b69, type: 3}
   _preparationPhaseMusic: {fileID: 0}
   _fightPhaseMusic: {fileID: 0}
 --- !u!4 &1688776461
