@@ -234,6 +234,7 @@ MonoBehaviour:
   _healthMax: 10
   _currentHealth: 0
   damage: 2
+  gameController: {fileID: 0}
   _reward: 10
   _distanceMin: 1.5
   _visibilityRadius: 6
@@ -379,7 +380,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d76c4fd7fcc999478444fba5abae75e, type: 2}
+  - {fileID: 2100000, guid: 6a76f1aceb0ec5a4fa3e488539fba5d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
