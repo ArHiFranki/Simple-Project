@@ -56,7 +56,6 @@ public class Spawner : MonoBehaviour
         SetWave(_currentWaveNumber++);
         _spawned = 0;
         _currentWaveEnemyCount = _currentWave.Count;
-        Debug.Log("_currentWaveEnemyCount: " + _currentWaveEnemyCount);
     }
 
     private void SpawnWave()
