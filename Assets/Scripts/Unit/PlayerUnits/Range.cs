@@ -84,7 +84,7 @@ public class Range : PlayerUnit
 
         float distToDefendPoint = Vector3.Distance(_defendPoint.position, transform.position);
 
-        if (distToDefendPoint > 1 && closedEnemy != null)
+        if (distToDefendPoint > this.distToDefendPoint && closedEnemy != null)
         {
             // »дет к точке защиты
             if (_nearestEnemyDistance > _radius)
@@ -108,12 +108,12 @@ public class Range : PlayerUnit
                 arrowCreate(closedEnemy);
             }
         }
-        else if (distToDefendPoint > 1 && closedEnemy == null)
+        else if (distToDefendPoint > this.distToDefendPoint && closedEnemy == null)
         {
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_defendPoint.position);
         }
-        else if (distToDefendPoint < 1 && closedEnemy != null && _nearestEnemyDistance < _distanceMin)
+        else if (distToDefendPoint < this.distToDefendPoint && closedEnemy != null && _nearestEnemyDistance < _distanceMin)
         {
             transform.LookAt(closedEnemy);
             _navMeshAgent.enabled = false;

@@ -69,7 +69,7 @@ public class Melee : PlayerUnit
 
         float distToDefendPoint = Vector3.Distance(_defendPoint.position, transform.position);
 
-        if (distToDefendPoint > 1 && closedEnemy != null)
+        if (distToDefendPoint > this.distToDefendPoint && closedEnemy != null)
         {
             // »дет к точке защиты
             if (_nearestEnemyDistance > _radius)
@@ -93,12 +93,12 @@ public class Melee : PlayerUnit
                 // _arrowCreate(ClosedEnemy);
             }
         }
-        else if (distToDefendPoint > 1 && closedEnemy == null)
+        else if (distToDefendPoint > this.distToDefendPoint && closedEnemy == null)
         {
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_defendPoint.position);
         }
-        else if (distToDefendPoint < 1 && closedEnemy != null && _nearestEnemyDistance < _minimalDistance)
+        else if (distToDefendPoint < this.distToDefendPoint && closedEnemy != null && _nearestEnemyDistance < _minimalDistance)
         {
             transform.LookAt(closedEnemy);
             _navMeshAgent.enabled = false;

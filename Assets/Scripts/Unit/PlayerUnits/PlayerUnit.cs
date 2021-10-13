@@ -11,6 +11,8 @@ public class PlayerUnit : Unit
     public GameObject _statusSelectionMenu;
 
     [HideInInspector] public Transform _defendPoint;
+ 
+    public float distToDefendPoint;
 
     public int unitPrice;
 

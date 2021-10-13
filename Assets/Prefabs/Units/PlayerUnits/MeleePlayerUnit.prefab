@@ -114,6 +114,7 @@ MonoBehaviour:
   isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4398403818420525923}
   _defendPoint: {fileID: 0}
+  distToDefendPoint: 0.5
   unitPrice: 10
   _minimalDistance: 1.5
   _radius: 5

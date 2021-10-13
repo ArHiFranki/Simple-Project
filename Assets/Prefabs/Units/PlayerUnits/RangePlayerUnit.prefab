@@ -278,6 +278,7 @@ MonoBehaviour:
   isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4702141537437396107}
   _defendPoint: {fileID: 0}
+  distToDefendPoint: 0.5
   unitPrice: 20
   bulletPrefab: {fileID: 8654161114813478119, guid: 51d3cb469348c374cb1ea9eb3759dd28, type: 3}
   bulletStartPosition: {fileID: 2904359424954249292}
