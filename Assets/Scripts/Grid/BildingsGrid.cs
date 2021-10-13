@@ -238,6 +238,7 @@ public class BildingsGrid : MonoBehaviour
             // Запомнит юнита для дальнейщего выбора поведения
             _unitflyingBilding = _flyingBilding;
             _gameController.ChangeGold(-playerUnit.unitPrice);
+            playerUnit.PlaceUnit();
         }
 
         if (_flyingBilding.TryGetComponent(out ProtectiveConstruction protectiveConstruction))

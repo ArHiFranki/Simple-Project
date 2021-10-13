@@ -12,7 +12,12 @@ public class Melee : PlayerUnit
 
     [SerializeField] [Header("Агрорадиус")] 
     private float _radius;
-   
+
+    private void OnDisable()
+    {
+        gameController.WaveClear -= ReturnToStartingPoint;
+    }
+
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();

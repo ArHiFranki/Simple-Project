@@ -29,6 +29,12 @@ public class Range : PlayerUnit
 
     private float _timeAfterLastShot;
 
+    private void OnDisable()
+    {
+        gameController.WaveClear -= ReturnToStartingPoint;
+    }
+
+
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -133,4 +139,6 @@ public class Range : PlayerUnit
             _timeAfterLastShot = 0;
         }
     }
+
+
 }

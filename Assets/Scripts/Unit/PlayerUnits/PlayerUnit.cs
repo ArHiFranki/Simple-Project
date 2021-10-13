@@ -11,7 +11,10 @@ public class PlayerUnit : Unit
     public GameObject _statusSelectionMenu;
 
     [HideInInspector] public Transform _defendPoint;
- 
+
+    private Vector3 startPoint;
+
+
     public float distToDefendPoint;
 
     public int unitPrice;
@@ -34,5 +37,16 @@ public class PlayerUnit : Unit
         isUnitAtack = false;
         isUnitDefend = true;
         _statusSelectionMenu.SetActive(false);
+    }
+
+    public void ReturnToStartingPoint()
+    {
+        transform.position = startPoint;
+    }
+
+    public void PlaceUnit()
+    {
+        gameController.WaveClear += ReturnToStartingPoint;
+        startPoint = transform.position;
     }
 }
