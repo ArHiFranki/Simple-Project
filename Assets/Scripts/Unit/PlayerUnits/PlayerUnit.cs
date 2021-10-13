@@ -32,6 +32,5 @@ public class PlayerUnit : Unit
         isUnitAtack = false;
         isUnitDefend = true;
         _statusSelectionMenu.SetActive(false);
-        //gameController.StartStyleSelectedEvent();
     }
 }
