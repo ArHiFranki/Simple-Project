@@ -1272,6 +1272,7 @@ MonoBehaviour:
   _menu: {fileID: 1118754289}
   _musicController: {fileID: 1055147825}
   _soundFXController: {fileID: 1274598726}
+  _spawner: {fileID: 554685306}
   _isGamePause: 0
   _isGameOver: 0
   _isPreparationPhase: 0

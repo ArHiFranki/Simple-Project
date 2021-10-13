@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Menu _menu;
     [SerializeField] private MusicController _musicController;
     [SerializeField] private SoundFXController _soundFXController;
+    [SerializeField] private Spawner _spawner;
     [SerializeField] private bool _isGamePause;
     [SerializeField] private bool _isGameOver;
     [SerializeField] private bool _isPreparationPhase;
@@ -17,7 +18,8 @@ public class GameController : MonoBehaviour
 
     private int _curruntBaseHitPoints;
     private int _totalEnemyCount;
-    private int _deadEnemyCount;
+    private int _totalDeadEnemyCount;
+    private int _deadEnemyInCurrentWave;
 
     public bool IsGamePause => _isGamePause;
     public bool IsGameOver => _isGameOver;
@@ -33,6 +35,7 @@ public class GameController : MonoBehaviour
     public event UnityAction GoldChanged;
     public event UnityAction StartPreparationPhase;
     public event UnityAction StartFightPhase;
+    public event UnityAction WaveClear;
     public event UnityAction<int, int> BaseHitPointsChanged;
 
     private void OnEnable()
@@ -51,7 +54,7 @@ public class GameController : MonoBehaviour
         _isPreparationPhase = true;
         _isFightPhase = false;
         _curruntBaseHitPoints = _baseHitPointsMax;
-        _deadEnemyCount = 0;
+        _totalDeadEnemyCount = 0;
         StartPreparationPhase?.Invoke();
     }
 
@@ -115,13 +118,21 @@ public class GameController : MonoBehaviour
 
     public void IncrementDeadEnemyCount()
     {
-        _deadEnemyCount++;
+        _totalDeadEnemyCount++;
+        _deadEnemyInCurrentWave++;
 
-        if(_deadEnemyCount == _totalEnemyCount && !_isGameOver)
+        if (_totalDeadEnemyCount == _totalEnemyCount && !_isGameOver)
         {
             GameWin?.Invoke();
             _musicController.StopBackgroundMusic();
             _soundFXController.PlayVictorySound();
+        }
+
+        if (_deadEnemyInCurrentWave == _spawner.CurrentWaveEnemyCount)
+        {
+            SetPreparationPhase();
+            WaveClear?.Invoke();
+            _deadEnemyInCurrentWave = 0;
         }
     }
 
