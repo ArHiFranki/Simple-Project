@@ -19,8 +19,6 @@ public class Spawner : MonoBehaviour
     public int CurrentWaveEnemyCount => _currentWaveEnemyCount;
     public int TotalEnemyCount => _totalEnemyCount;
 
-    public event UnityAction AllEnemyInCurrentWaveSpawned;
-
     private void Start()
     {
         SetWave(_currentWaveNumber);
@@ -75,7 +73,6 @@ public class Spawner : MonoBehaviour
 
             if (_spawned == _currentWave.Count)
             {
-                AllEnemyInCurrentWaveSpawned?.Invoke();
                 _currentWave = null;
             }
         }
