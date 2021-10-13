@@ -13,14 +13,14 @@ public class WinScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameController.GameWin += OnGameWin;
+        _gameController.Victory += OnGameWin;
         _restartButton.onClick.AddListener(OnRestartButtonClick);
         _exitButton.onClick.AddListener(OnExitButtonClick);
     }
 
     private void OnDisable()
     {
-        _gameController.GameWin += OnGameWin;
+        _gameController.Victory += OnGameWin;
         _restartButton.onClick.RemoveListener(OnRestartButtonClick);
         _exitButton.onClick.RemoveListener(OnExitButtonClick);
     }
