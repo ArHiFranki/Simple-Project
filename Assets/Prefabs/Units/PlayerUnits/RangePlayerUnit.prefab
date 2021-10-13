@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8c183412706759c42bb57f843e5fc06a, type: 2}
+  - {fileID: 2100000, guid: af4ad3a4db202a04bbe383616dc68b6c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -274,8 +274,8 @@ MonoBehaviour:
   _currentHealth: 0
   damage: 2
   gameController: {fileID: 0}
-  _isUnitAtack: 0
-  _isUnitDefend: 0
+  isUnitAtack: 0
+  isUnitDefend: 0
   _statusSelectionMenu: {fileID: 4702141537437396107}
   _defendPoint: {fileID: 0}
   unitPrice: 20
@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridBuildingSize: {x: 1, y: 1}
   _statePosition: 0
+  isTargetPoint: 0
 --- !u!1 &7393076858591129586
 GameObject:
   m_ObjectHideFlags: 0
