@@ -12,7 +12,7 @@ public class NextWave : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawner.AllEnemyInCurrentWaveSpawned += OnAllEnemySpawned;
+        _gameController.WaveClear += OnWaveClear;
         _gameController.NewUnitBuild += OnNewUnitBuild;
         _gameController.StyleSelected += OnStyleSelected;
         _nextWaveButton.onClick.AddListener(OnNextWaveButtonClick);
@@ -20,13 +20,13 @@ public class NextWave : MonoBehaviour
 
     private void OnDisable()
     {
-        _spawner.AllEnemyInCurrentWaveSpawned -= OnAllEnemySpawned;
+        _gameController.WaveClear -= OnWaveClear;
         _gameController.NewUnitBuild -= OnNewUnitBuild;
         _gameController.StyleSelected -= OnStyleSelected;
         _nextWaveButton.onClick.RemoveListener(OnNextWaveButtonClick);
     }
 
-    public void OnAllEnemySpawned()
+    public void OnWaveClear()
     {
         _nextWaveButton.gameObject.SetActive(true);
     }

@@ -10,16 +10,20 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPoints;
 
     private Wave _currentWave;
+    private int _currentWaveEnemyCount;
+    private int _totalEnemyCount;
     private int _currentWaveNumber = 0;
     private int _spawned;
     private float _timeAfterLastSpawn;
 
-    public event UnityAction AllEnemyInCurrentWaveSpawned;
+    public int CurrentWaveEnemyCount => _currentWaveEnemyCount;
+    public int TotalEnemyCount => _totalEnemyCount;
 
     private void Start()
     {
         SetWave(_currentWaveNumber);
-        TotalEnemyCount();
+        TotalEnemyCountCalculator();
+        _currentWaveEnemyCount = 0;
     }
 
     private void Update()
@@ -51,6 +55,7 @@ public class Spawner : MonoBehaviour
     {
         SetWave(_currentWaveNumber++);
         _spawned = 0;
+        _currentWaveEnemyCount = _currentWave.Count;
     }
 
     private void SpawnWave()
@@ -68,13 +73,12 @@ public class Spawner : MonoBehaviour
 
             if (_spawned == _currentWave.Count)
             {
-                AllEnemyInCurrentWaveSpawned?.Invoke();
                 _currentWave = null;
             }
         }
     }
 
-    private void TotalEnemyCount()
+    private void TotalEnemyCountCalculator()
     {
         int totalEnemysCount = 0;
 
@@ -83,7 +87,7 @@ public class Spawner : MonoBehaviour
             totalEnemysCount += _waves[i].Count;
         }
 
-        _gameController.SetTotalEnemyCount(totalEnemysCount);
+        _totalEnemyCount = totalEnemysCount;
     }
 }
 
